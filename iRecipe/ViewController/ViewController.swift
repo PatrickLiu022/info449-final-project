@@ -68,7 +68,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // TODO: DELETE if qsd
             recipeVC.favButtonTitle = "Save to Fav"
             recipeVC.currRecipeName = recipeNames[indexPath.row]
-            
+            recipeVC.doneButtonDestination = "viewController"
             
             
             self.navigationController?.pushViewController(recipeVC, animated: true)

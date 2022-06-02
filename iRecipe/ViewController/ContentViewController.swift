@@ -15,6 +15,7 @@ class ContentViewController: UIViewController {
     
     var favButtonTitle : String = "" // text displayed on the fav button
     var favRecipeNames : [String] = []
+    var doneButtonDestination : String = ""
     
     // TODO: Modify current assumption
     var instructions : String = ""
@@ -30,9 +31,14 @@ class ContentViewController: UIViewController {
     
     // Defines action after pressing "done"
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        // go back to "home"
-        if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
-            self.navigationController?.pushViewController(mainVC, animated: true)
+        if doneButtonDestination == "viewController" { // go back to "home"
+            if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
+                self.navigationController?.pushViewController(mainVC, animated: true)
+            }
+        } else { // go back to "fav"
+            if let favVC = storyboard?.instantiateViewController(withIdentifier: "favViewController") as? FavViewController {
+                self.navigationController?.pushViewController(favVC, animated: true)
+            }
         }
     }
     

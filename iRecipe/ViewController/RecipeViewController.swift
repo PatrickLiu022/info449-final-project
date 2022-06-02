@@ -16,6 +16,7 @@ class RecipeViewController: UIViewController {
     // TODO: DELETE if figured out access to VCs
     var favButtonTitle : String = "" // text displayed on the fav button
     var currRecipeName : String = ""
+    var doneButtonDestination = "" // mainVC or favVC
     
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
@@ -45,6 +46,7 @@ class RecipeViewController: UIViewController {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.favButtonTitle = favButtonTitle
                 contentVC.currRecipeName = currRecipeName
+                contentVC.doneButtonDestination = doneButtonDestination
             }
         }
     }
