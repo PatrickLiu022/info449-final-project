@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="-1396" y="844"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="ZNu-V5-Z6s">
             <objects>
-                <viewController id="xme-m5-DM2" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchViewController" id="xme-m5-DM2" customClass="SearchViewController" customModule="iRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yJy-t2-y5U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -97,7 +97,7 @@
         <!--Filter View Controller-->
         <scene sceneID="JER-cm-PgL">
             <objects>
-                <viewController id="aoL-vB-Ykx" customClass="FilterViewController" customModule="iRecipe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="filterViewController" id="aoL-vB-Ykx" customClass="FilterViewController" customModule="iRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="otE-9R-zWC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -330,7 +330,7 @@
         <!--Favorites-->
         <scene sceneID="Wpf-kT-Sg1">
             <objects>
-                <viewController id="MAe-B8-9Zl" customClass="FavViewController" customModule="iRecipe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="favViewController" id="MAe-B8-9Zl" customClass="FavViewController" customModule="iRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kIa-FL-ujC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -350,6 +350,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="LNX-Mn-P3k"/>
+                    <connections>
+                        <outlet property="favTableView" destination="IWk-rZ-hor" id="X7w-LL-xpI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOA-6m-D50" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

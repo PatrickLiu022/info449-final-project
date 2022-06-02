@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let recipeDescs = ["desc for testing recipe1", "desc for testing recipe2", "desc for testing recipe3", "desc for testing recipe4", "desc for testing recipe5", "desc for testing recipe6"] // TODO: DELETE
     
     var viewedRecipeNames : [String] = [] // the recipe names to be saved in "History"
+    var favRecipeNames : [String] = [] // the recipe names favorited by user
     
     // Fetch Data
     let monitor = NWPathMonitor()
@@ -74,7 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         // set fav button title on ContentViewController
-        // TODO: FIX!!!!!!!! DELETE see line 66 as well
+        // TODO: FIX!!!!!!!! DELETE see line 68 as well
         if let contentVC = storyboard?.instantiateViewController(withIdentifier: "contentViewController") as? ContentViewController {
             contentVC.favButtonTitle = "Save to Fav"
         }
@@ -94,6 +95,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let historyVC = storyboard?.instantiateViewController(withIdentifier: "historyViewController") as? HistoryViewController {
             historyVC.historyRecord = "\(viewedRecipeNames)"
             print("DEBUG: \(historyVC.historyRecord)")
+        }
+        if let favVC = storyboard?.instantiateViewController(withIdentifier: "favViewController") as? FavViewController {
+            favVC.favRecipeNames = favRecipeNames
         }
     }
     

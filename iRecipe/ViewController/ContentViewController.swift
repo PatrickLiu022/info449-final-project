@@ -36,6 +36,7 @@ class ContentViewController: UIViewController {
         }
     }
     
+    // TODO: Fix favRecipeNames ONLY stores currRecipeName (not a list of all names)
     @IBAction func favButtonPressed(_ sender: UIButton) {
         //if favRecipes.contains(currRecipe) && favRecipes.count > 0 {} else {}
         if favRecipeNames.contains(currRecipeName) && favRecipeNames.count > 0 { // unsave from favorites
@@ -63,9 +64,12 @@ class ContentViewController: UIViewController {
             print("Saved!")
             print(favRecipeNames)
         } // TODO: DELETE, uncomment above
+        
+        
+        if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
+            mainVC.favRecipeNames = favRecipeNames
+        }
     }
-    
-    // TODO: pass "favRecipeNames" to FavViewController's favRecipeNames
     
     override func viewDidLoad() {
         super.viewDidLoad()

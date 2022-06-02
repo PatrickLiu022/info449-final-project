@@ -106,12 +106,12 @@
 				6DB677BB2845D64400B00BAE /* AppDelegate.swift */,
 				6DB677BD2845D64400B00BAE /* SceneDelegate.swift */,
 				6DB677BF2845D64400B00BAE /* ViewController.swift */,
+				6DB677CF2845D90E00B00BAE /* FavViewController.swift */,
+				6DB677D12845D92600B00BAE /* HistoryViewController.swift */,
+				6DB677D72845DCB900B00BAE /* SearchViewController.swift */,
+				6DB677D92845DD0B00B00BAE /* FilterViewController.swift */,
 				6DB677D32845DC6B00B00BAE /* RecipeViewController.swift */,
 				6DB677D52845DC9400B00BAE /* ContentViewController.swift */,
-				6DB677CF2845D90E00B00BAE /* FavViewController.swift */,
-				6DB677D92845DD0B00B00BAE /* FilterViewController.swift */,
-				6DB677D72845DCB900B00BAE /* SearchViewController.swift */,
-				6DB677D12845D92600B00BAE /* HistoryViewController.swift */,
 				6DE2D3A72848638600F465EE /* TableViewCell.swift */,
 			);
 			path = ViewController;
