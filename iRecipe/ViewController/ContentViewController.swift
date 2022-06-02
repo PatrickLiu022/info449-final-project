@@ -1,5 +1,5 @@
 //
-//  RecipeViewController.swift
+//  ContentViewController.swift
 //  iRecipe
 //
 //  Created by Helen Li on 5/30/22.
@@ -7,7 +7,18 @@
 
 import UIKit
 
-class RecipeViewController: UIViewController {
+class ContentViewController: UIViewController {
+    
+    // TODO: Modify!!!
+    // Current Assumptions: steps
+    
+    var steps : String = ""
+    
+    // IBOutlet connections for "stepsLabel"
+    // Do NOT connect the label now
+    // Make sure how the data looks like first!!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
