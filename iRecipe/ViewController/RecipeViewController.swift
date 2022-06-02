@@ -9,7 +9,7 @@ import UIKit
 
 class RecipeViewController: UIViewController {
     
-    //var recipes : [Recipe] = []
+    var recipes : [Recipe] = []
     var recipeNames : [String] = []  // TODO: DELETE, uncommet above line
     var indexPathRow = -1 // value will be assigned from "Home" ViewController
     
