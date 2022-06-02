@@ -21,6 +21,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let recipeNames = ["recipe1 for testing", "recipe2 for testing", "recipe3 for testing", "recipe4 for testing", "recipe5 for testing", "recipe16 for testing"]  // TODO: DELETE, uncommet above line
     let recipeDescs = ["desc for testing recipe1", "desc for testing recipe2", "desc for testing recipe3", "desc for testing recipe4", "desc for testing recipe5", "desc for testing recipe6"] // TODO: DELETE
     
+    var viewedRecipeNames : [String] = [] // the recipe names to be saved in "History"
+    
     // Fetch Data
     let monitor = NWPathMonitor()
     let defaultUrl = "https://spoonacular.com/food-api"
@@ -58,6 +60,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 100.0
     }
     
+    
+    
+    
+    
+    
+    
     // Defines action of each table cell => connects to RecipeViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
@@ -65,6 +73,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             recipeVC.recipeNames = recipeNames // TODO: DELETE, uncommet above line
             recipeVC.indexPathRow = indexPath.row
             self.navigationController?.pushViewController(recipeVC, animated: true)
+        }
+        
+        
+        // updates history record
+        //let viewedName = recipes[indexPath.row].recipeName
+        let viewedName = recipeNames[indexPath.row] // TODO: DELETE, uncomment above line
+        if viewedRecipeNames.contains(viewedName) {
+            // remove "viewedName" from record
+            viewedRecipeNames = viewedRecipeNames.filter() { $0 != viewedName }
+        }
+        // add "viewed" name to the front of the array
+        viewedRecipeNames.insert(viewedName, at: 0)
+        print(viewedRecipeNames)
+        
+        if let historyVC = storyboard?.instantiateViewController(withIdentifier: "historyViewController") as? HistoryViewController {
+            historyVC.historyRecord = "\(viewedRecipeNames)"
+            print("DEBUG: \(historyVC.historyRecord)")
         }
     }
     

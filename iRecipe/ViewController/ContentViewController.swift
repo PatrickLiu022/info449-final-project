@@ -18,7 +18,13 @@ class ContentViewController: UIViewController {
     // Do NOT connect the label now
     // Make sure how the data looks like first!!
     
-    
+    // Defines action after pressing "done"
+    @IBAction func doneButtonPressed(_ sender: UIButton) {
+        // go back to "home"
+        if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
+            self.navigationController?.pushViewController(mainVC, animated: true)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

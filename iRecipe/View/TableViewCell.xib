@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,11 +29,19 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvQ-to-cV9">
+                        <rect key="frame" x="242" y="35" width="38" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="linkColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="QvQ-to-cV9" secondAttribute="trailing" constant="40" id="1Pz-pR-zIO"/>
                     <constraint firstItem="6lB-XA-DYJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="I9Q-EG-b3k"/>
                     <constraint firstItem="6lB-XA-DYJ" firstAttribute="top" secondItem="ooS-8p-Obl" secondAttribute="bottom" constant="20" id="O2J-sQ-EMi"/>
                     <constraint firstItem="ooS-8p-Obl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OqP-Jn-uEK"/>
+                    <constraint firstItem="QvQ-to-cV9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="k2S-QG-lBb"/>
                     <constraint firstItem="ooS-8p-Obl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="pkC-3O-S1B"/>
                     <constraint firstAttribute="trailing" secondItem="6lB-XA-DYJ" secondAttribute="trailing" constant="20" id="uT3-ME-enV"/>
                     <constraint firstAttribute="trailing" secondItem="ooS-8p-Obl" secondAttribute="trailing" constant="20" id="z6k-GY-TNt"/>
@@ -46,4 +55,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="110.15625"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

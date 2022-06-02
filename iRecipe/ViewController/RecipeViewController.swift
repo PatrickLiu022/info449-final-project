@@ -11,11 +11,7 @@ class RecipeViewController: UIViewController {
     
     //var recipes : [Recipe] = []
     var recipeNames : [String] = []  // TODO: DELETE, uncommet above line
-    
     var indexPathRow = -1 // value will be assigned from "Home" ViewController
-    
-    var viewedRecipeNames : [String] = [] // the recipe names to be saved in "History"
-    
     
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
@@ -35,11 +31,8 @@ class RecipeViewController: UIViewController {
 //        if let contentVC = storyboard?.instantiateViewController(withIdentifier: "contentViewController") as? ContentViewController {
 //            // TODO: add actions
 //        }
-        
-        // save the recipe name to history
-        //viewedRecipeNames.append(currRecipe().recipeName)
-        viewedRecipeNames.append(recipeNames[indexPathRow])  // TODO: DELETE, uncommet above line
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

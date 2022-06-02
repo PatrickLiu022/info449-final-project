@@ -8,11 +8,17 @@
 import UIKit
 
 class HistoryViewController: UIViewController {
+    
+    var historyRecord = "No History"
 
+    @IBOutlet weak var historyLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("for debugging purpose: \(historyRecord)")
+        historyLabel.text = historyRecord
     }
     
 
