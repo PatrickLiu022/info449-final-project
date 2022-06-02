@@ -67,6 +67,9 @@
                                 <rect key="frame" x="174.5" y="223" width="65" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Check"/>
+                                <connections>
+                                    <action selector="checkButtonPressed:" destination="xme-m5-DM2" eventType="touchUpInside" id="zUz-ya-qvY"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="nd8-Zo-z8g">
                                 <rect key="frame" x="20" y="294" width="374" height="509"/>
@@ -89,6 +92,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zdO-Pb-1Af"/>
+                    <connections>
+                        <outlet property="searchTableView" destination="nd8-Zo-z8g" id="aFx-5b-YUd"/>
+                        <outlet property="searchTextField" destination="9tW-Nk-CRG" id="0AM-SX-ujO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xjl-Ok-avy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
