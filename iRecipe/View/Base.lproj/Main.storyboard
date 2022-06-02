@@ -225,19 +225,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-zH-zpH">
-                                <rect key="frame" x="20" y="188" width="374" height="81.5"/>
-                                <string key="text">a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients </string>
+                                <rect key="frame" x="20" y="188" width="374" height="101.5"/>
+                                <string key="text">RecipeViewController                          a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients a list of ingredients </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRg-Qa-f50">
-                                <rect key="frame" x="179" y="389.5" width="56" height="31"/>
+                                <rect key="frame" x="179" y="409.5" width="56" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="View"/>
                                 <connections>
                                     <action selector="viewButtonPressed:" destination="Jzj-0L-QKM" eventType="touchUpInside" id="K9H-Tn-z0K"/>
-                                    <segue destination="Wpv-4h-R1U" kind="show" id="VY5-cP-cnZ"/>
+                                    <segue destination="Wpv-4h-R1U" kind="show" identifier="recipeToContentVC" id="VY5-cP-cnZ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kf9-Vm-9NN">
@@ -246,13 +246,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ui0-ZS-CyB">
-                                <rect key="frame" x="0.0" y="762" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem title="Save to/Unsave Favorites" id="yhf-QL-LUC"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HnT-kc-li9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -287,7 +280,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Details: Step 1 2 3 4 5 6 7 8 9 10 blah blah" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGU-Gp-4lI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ContentViewController                       Recipe Details: Step 1 2 3 4 5 6 7 8 9 10 blah blah" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGU-Gp-4lI">
                                 <rect key="frame" x="25" y="144" width="364" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="0MZ-Lh-SoP"/>
@@ -304,18 +297,31 @@
                                     <action selector="doneButtonPressed:" destination="Wpv-4h-R1U" eventType="touchUpInside" id="Ycv-d3-KE2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhG-Yz-6UZ">
+                                <rect key="frame" x="256" y="69" width="133" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Save/Unsave Fav"/>
+                                <connections>
+                                    <action selector="favButtonPressed:" destination="Wpv-4h-R1U" eventType="touchUpInside" id="cdg-DN-H6t"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="t8d-yZ-bZo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="dhG-Yz-6UZ" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="25" id="6qg-1x-Wr2"/>
                             <constraint firstItem="lrd-La-eyy" firstAttribute="top" secondItem="dGU-Gp-4lI" secondAttribute="bottom" constant="60" id="Bh1-lV-eXq"/>
                             <constraint firstItem="dGU-Gp-4lI" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="100" id="PAa-JQ-9ai"/>
                             <constraint firstItem="t8d-yZ-bZo" firstAttribute="trailing" secondItem="dGU-Gp-4lI" secondAttribute="trailing" constant="25" id="kwf-GY-EBt"/>
                             <constraint firstItem="lrd-La-eyy" firstAttribute="centerX" secondItem="t8d-yZ-bZo" secondAttribute="centerX" id="lxO-vb-DCe"/>
                             <constraint firstItem="dGU-Gp-4lI" firstAttribute="leading" secondItem="t8d-yZ-bZo" secondAttribute="leading" constant="25" id="p55-X3-78r"/>
+                            <constraint firstItem="t8d-yZ-bZo" firstAttribute="trailing" secondItem="dhG-Yz-6UZ" secondAttribute="trailing" constant="25" id="rNZ-g6-TyP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qam-Z4-nbv"/>
+                    <connections>
+                        <outlet property="favButton" destination="dhG-Yz-6UZ" id="Xd4-8B-znO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDp-r8-oqQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

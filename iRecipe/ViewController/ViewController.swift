@@ -8,10 +8,6 @@
 import UIKit
 import Network
 
-
-
-
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     /* Variables */
@@ -59,22 +55,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-    
-    
-    
-    
-    
-    
-    
-    // Defines action of each table cell => connects to RecipeViewController
+
+    // Defines action of each table cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             //recipeVC.recipes = recipes
             recipeVC.recipeNames = recipeNames // TODO: DELETE, uncommet above line
             recipeVC.indexPathRow = indexPath.row
+            
+            // TODO: DELETE if qsd
+            recipeVC.favButtonTitle = "Save to Fav"
+            recipeVC.currRecipeName = recipeNames[indexPath.row]
+            
+            
+            
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
         
+        // set fav button title on ContentViewController
+        // TODO: FIX!!!!!!!! DELETE see line 66 as well
+        if let contentVC = storyboard?.instantiateViewController(withIdentifier: "contentViewController") as? ContentViewController {
+            contentVC.favButtonTitle = "Save to Fav"
+        }
         
         // updates history record
         //let viewedName = recipes[indexPath.row].recipeName
@@ -87,6 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewedRecipeNames.insert(viewedName, at: 0)
         print(viewedRecipeNames)
         
+        // TODO: FIX!!!!!!!!
         if let historyVC = storyboard?.instantiateViewController(withIdentifier: "historyViewController") as? HistoryViewController {
             historyVC.historyRecord = "\(viewedRecipeNames)"
             print("DEBUG: \(historyVC.historyRecord)")

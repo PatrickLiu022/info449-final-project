@@ -13,4 +13,5 @@ struct Recipe : Decodable {
     let ingredients : [String] // list of ingredients
     
     // TODO: Other info about each recipe
+    //let instructions : String // recipe instructions??
 }

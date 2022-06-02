@@ -8,6 +8,10 @@
 import UIKit
 
 class FavViewController: UIViewController {
+    
+    //let favRecipes : [Recipe] = []
+    let favRecipeNames = ["fav recipe 1", "fav recipe 2", "fav recipe 3", "fav recipe 4"] // TODO: DELETE, uncomment above
+    let favRecipeDescs = ["description 1", "description 2", "description 3", "description 4"] // TODO: DELETE
 
     override func viewDidLoad() {
         super.viewDidLoad()
