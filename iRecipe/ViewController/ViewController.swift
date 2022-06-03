@@ -59,7 +59,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // Defines action of each table cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             
@@ -79,6 +78,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
+    
+    
+    /* Method to Pass Data to Other VCs */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "homeToSearchVC" {
+            if let searchVC = segue.destination as? SearchViewController {
+                // TODO: Modify after fetching
+                //searchVC.allRecipes = recipes
+                searchVC.allRecipeNames = recipeNames
+            }
+        }
+    }
+    
     
     /* Data Fetching Methods */
     

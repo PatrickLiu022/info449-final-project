@@ -27,17 +27,12 @@ class FavRecipes {
 //    func unfavCurrRecipe(_ currRecipe : Recipe) {
 //    }
 //    func setFavButtonTitle(_ recipe : Recipe) {
-//
 //    }
     func favCurrRecipe(_ currRecipeName : String) {
-        print("About to fav \(currRecipeName)")
         favRecipeNames.insert(currRecipeName, at: 0)
-        print("Done: \(favRecipeNames)")
     }
     func unfavCurrRecipe(_ currRecipeName : String) {
-        print("About to un-fav \(currRecipeName)")
         favRecipeNames = favRecipeNames.filter() { $0 != currRecipeName }
-        print("Done: \(favRecipeNames)")
     }
     func setFavButtonTitle(_ currRecipeName : String) -> String {
         if favRecipeNames.contains(currRecipeName) {

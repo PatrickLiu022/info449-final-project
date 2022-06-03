@@ -52,19 +52,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type in a recipe name below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5I-2y-xHB">
-                                <rect key="frame" x="40" y="118" width="221" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search recipes by name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5I-2y-xHB">
+                                <rect key="frame" x="40" y="108" width="183" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Recipe Name Here" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9tW-Nk-CRG">
-                                <rect key="frame" x="40" y="159" width="149" height="34"/>
+                                <rect key="frame" x="40" y="139" width="149" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYM-rp-aex">
-                                <rect key="frame" x="174.5" y="223" width="65" height="31"/>
+                                <rect key="frame" x="174.5" y="193" width="65" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Check"/>
                                 <connections>
@@ -72,28 +72,48 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="nd8-Zo-z8g">
-                                <rect key="frame" x="20" y="294" width="374" height="509"/>
+                                <rect key="frame" x="20" y="244" width="374" height="469"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, no result found :(" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RNx-Hc-Kqv">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6Y-WQ-mth">
+                                <rect key="frame" x="169.5" y="742" width="75" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Dismiss"/>
+                                <connections>
+                                    <action selector="dismissButtonPressed:" destination="xme-m5-DM2" eventType="touchUpInside" id="BBJ-an-7LD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ltr-Dw-icA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9tW-Nk-CRG" firstAttribute="leading" secondItem="Ltr-Dw-icA" secondAttribute="leading" constant="40" id="1oQ-OF-geE"/>
                             <constraint firstItem="Ltr-Dw-icA" firstAttribute="trailing" secondItem="nd8-Zo-z8g" secondAttribute="trailing" constant="20" id="2dB-60-9sB"/>
-                            <constraint firstItem="TYM-rp-aex" firstAttribute="top" secondItem="9tW-Nk-CRG" secondAttribute="bottom" constant="30" id="SK6-Tq-hKp"/>
-                            <constraint firstItem="w5I-2y-xHB" firstAttribute="top" secondItem="Ltr-Dw-icA" secondAttribute="top" constant="30" id="YfK-7R-62a"/>
+                            <constraint firstItem="TYM-rp-aex" firstAttribute="top" secondItem="9tW-Nk-CRG" secondAttribute="bottom" constant="20" id="SK6-Tq-hKp"/>
+                            <constraint firstItem="w5I-2y-xHB" firstAttribute="top" secondItem="Ltr-Dw-icA" secondAttribute="top" constant="20" id="YfK-7R-62a"/>
                             <constraint firstItem="w5I-2y-xHB" firstAttribute="leading" secondItem="Ltr-Dw-icA" secondAttribute="leading" constant="40" id="a0e-OE-l9R"/>
-                            <constraint firstItem="9tW-Nk-CRG" firstAttribute="top" secondItem="w5I-2y-xHB" secondAttribute="bottom" constant="20" id="dpe-Jl-Szy"/>
-                            <constraint firstItem="nd8-Zo-z8g" firstAttribute="top" secondItem="TYM-rp-aex" secondAttribute="bottom" constant="40" id="nCy-rj-gcx"/>
-                            <constraint firstItem="Ltr-Dw-icA" firstAttribute="bottom" secondItem="nd8-Zo-z8g" secondAttribute="bottom" constant="10" id="p4c-Jf-vhe"/>
+                            <constraint firstItem="9tW-Nk-CRG" firstAttribute="top" secondItem="w5I-2y-xHB" secondAttribute="bottom" constant="10" id="dpe-Jl-Szy"/>
+                            <constraint firstItem="Ltr-Dw-icA" firstAttribute="bottom" secondItem="w6Y-WQ-mth" secondAttribute="bottom" constant="40" id="gQL-lc-5UZ"/>
+                            <constraint firstItem="w6Y-WQ-mth" firstAttribute="centerX" secondItem="Ltr-Dw-icA" secondAttribute="centerX" id="mpq-cx-SrJ"/>
+                            <constraint firstItem="nd8-Zo-z8g" firstAttribute="top" secondItem="TYM-rp-aex" secondAttribute="bottom" constant="20" id="nCy-rj-gcx"/>
+                            <constraint firstItem="Ltr-Dw-icA" firstAttribute="bottom" secondItem="nd8-Zo-z8g" secondAttribute="bottom" constant="100" id="p4c-Jf-vhe"/>
                             <constraint firstItem="nd8-Zo-z8g" firstAttribute="leading" secondItem="Ltr-Dw-icA" secondAttribute="leading" constant="20" id="p9B-YS-S19"/>
                             <constraint firstItem="TYM-rp-aex" firstAttribute="centerX" secondItem="Ltr-Dw-icA" secondAttribute="centerX" id="zjW-6O-VOe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zdO-Pb-1Af"/>
                     <connections>
-                        <outlet property="searchTableView" destination="nd8-Zo-z8g" id="aFx-5b-YUd"/>
+                        <outlet property="checkButton" destination="TYM-rp-aex" id="0Is-aw-ac1"/>
+                        <outlet property="dismissButton" destination="w6Y-WQ-mth" id="85L-GR-MHO"/>
+                        <outlet property="noResultLabel" destination="RNx-Hc-Kqv" id="DsO-dU-qNa"/>
+                        <outlet property="searchTableView" destination="nd8-Zo-z8g" id="zoz-xA-zmd"/>
                         <outlet property="searchTextField" destination="9tW-Nk-CRG" id="0AM-SX-ujO"/>
                     </connections>
                 </viewController>
@@ -179,7 +199,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Search"/>
                                 <connections>
-                                    <segue destination="xme-m5-DM2" kind="show" id="OS7-SJ-ahr"/>
+                                    <segue destination="xme-m5-DM2" kind="show" identifier="homeToSearchVC" id="OS7-SJ-ahr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkL-74-ZFh">
@@ -187,7 +207,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Filter"/>
                                 <connections>
-                                    <segue destination="aoL-vB-Ykx" kind="show" id="Iov-tM-rXv"/>
+                                    <segue destination="aoL-vB-Ykx" kind="show" identifier="homeToFilterVC" id="Iov-tM-rXv"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jgK-j5-jMa">
