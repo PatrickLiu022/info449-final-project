@@ -53,8 +53,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
-            //recipeVC.recipes = searchedResults // TODO: uncomment
-            recipeVC.indexPathRow = indexPath.row
             recipeVC.currRecipeName = searchedResults[indexPath.row].recipeName
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }

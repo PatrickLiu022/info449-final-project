@@ -9,20 +9,19 @@ import UIKit
 
 class ContentViewController: UIViewController {
     
+    // TODO: Modify after fetching
     //var currRecipe : Recipe = nil
-    var currRecipeName : String = "" // TODO: DELETE, uncomment above
+    var currRecipeName : String = ""
     
-    
-    var favButtonTitle : String = "" // text displayed on the fav button
-    var favRecipeNames : [String] = []
     var doneButtonDestination : String = ""
     
-    // TODO: Modify current assumption
-    var instructions : String = ""
+//    var favButtonTitle : String = "" // text displayed on the fav button
     
-    // IBOutlet connections for "instructionsLabel"
-    // Do NOT connect the label now
-    // Make sure how the data looks like first!!
+
+    // TODO: Modify after fetching
+    var instructions : String = ""
+    // TODO: IBOutlet connections for "instructionsLabel"
+    // Do NOT connect the label now; make sure how the data looks like first!!
     
     
     
@@ -42,38 +41,26 @@ class ContentViewController: UIViewController {
         }
     }
     
-    // TODO: Fix favRecipeNames ONLY stores currRecipeName (not a list of all names)
+    
+    
+
     @IBAction func favButtonPressed(_ sender: UIButton) {
-        //if favRecipes.contains(currRecipe) && favRecipes.count > 0 {} else {}
-        if favRecipeNames.contains(currRecipeName) && favRecipeNames.count > 0 { // unsave from favorites
-            print(favRecipeNames)
-            print("About to UNSAVE chosen recipe from fav")
-            
-            favRecipeNames = favRecipeNames.filter() { $0 !=  currRecipeName}
+        // TODO: Modify after fetching
+        //if FavRecipes.instance.favRecipes.contains(currRecipe) {} else {}
+        if FavRecipes.instance.favRecipeNames.contains(currRecipeName) { // unfav curr recipe
+            FavRecipes.instance.unfavCurrRecipe(currRecipeName)
             favButton.setTitle("Save to Fav", for: .normal)
+            
             let alert = UIAlertController(title: "Success", message: "Unsaved from Fav!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
-            
-            print("Unsaved!")
-            print(favRecipeNames)
-        } else { // save to favorites
-            print(favRecipeNames)
-            print("About to SAVE chosen recipe from fav")
-            
-            favRecipeNames.append(currRecipeName)
+        } else { // fav curr recipe
+            FavRecipes.instance.favCurrRecipe(currRecipeName)
             favButton.setTitle("Unsave from Fav", for: .normal)
+            
             let alert = UIAlertController(title: "Success", message: "Saved to Fav!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
-            
-            print("Saved!")
-            print(favRecipeNames)
-        } // TODO: DELETE, uncomment above
-        
-        
-        if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
-            mainVC.favRecipeNames = favRecipeNames
         }
     }
     
@@ -82,7 +69,10 @@ class ContentViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        // set button text for the fav button
+        // TODO: Modify after fetching
+        //let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipe)
+        let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipeName)
+        
         favButton.setTitle(favButtonTitle, for: .normal)
     }
     

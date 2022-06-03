@@ -9,61 +9,48 @@ import UIKit
 
 class RecipeViewController: UIViewController {
     
-    //var recipes : [Recipe] = []
-    var recipeNames : [String] = []  // TODO: DELETE, uncommet above line
-    var indexPathRow = -1 // value will be assigned from "Home" ViewController
-    
-    // TODO: DELETE if figured out access to VCs
-    var favButtonTitle : String = "" // text displayed on the fav button
+    // TODO: Modify after fetching
+    //var currRecipe : Recipe = nil
     var currRecipeName : String = ""
-    var doneButtonDestination = "" // mainVC or favVC
+    
+//    var favButtonTitle : String = "" // text displayed on the fav button
+    var doneButtonDestination = ""   // homeVC or favVC
     
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var viewButton: UIButton!
     
-    
-//    // TODO: UNCOMMENT THIS FUNC
-//    // Find which recipe the user pressed on from "Home"
-//    func currRecipe() -> Recipe {
-//        recipes[indexPathRow]
-//    }
-    
+    // TODO: delete if did NOT end up using
     // Defines action after pressing the "view" button
     @IBAction func viewButtonPressed(_ sender: UIButton) {
         // auto change to ContentViewController (done)
-        
-//        // connects to ContentViewController
-//        if let contentVC = storyboard?.instantiateViewController(withIdentifier: "contentViewController") as? ContentViewController {
-//            //contentVC.instructions = currRecipe().instructions?? // TODO: uncomment
-//            contentVC.favButtonTitle = favButtonTitle
-//            contentVC.currRecipe = currRecipe().recipeName
-//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
-                contentVC.favButtonTitle = favButtonTitle
+                
+                // TODO: modify after fetching
+                //contentVC.currRecipe = currRecipe
                 contentVC.currRecipeName = currRecipeName
+                
                 contentVC.doneButtonDestination = doneButtonDestination
+//                contentVC.favButtonTitle = favButtonTitle
             }
         }
     }
-    
-    
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //recipeNameLabel.text = currRecipe().recipeName
-        recipeNameLabel.text = recipeNames[indexPathRow] // TODO: DELETE, uncomment above
         
-        //ingredientsLabel.text = currRecipe().ingredients // TODO: UNCOMMENT THIS LINE
+        // TODO: Modify after fetching
+        //recipeNameLabel.text = currRecipe.recipeName
+        recipeNameLabel.text = currRecipeName
+        
+        // TODO: Uncomment after fetching
+        //ingredientsLabel.text = currRecipe.ingredients
     }
     
 
