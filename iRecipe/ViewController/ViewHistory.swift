@@ -25,4 +25,5 @@ class ViewHistory {
         // add "currRecipeName" to the front of the array
         viewedRecipeNames.insert(currRecipeName, at: 0)
     }
+    
 }

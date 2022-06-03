@@ -67,7 +67,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             recipeVC.currRecipeName = recipeNames[indexPath.row]
         
             recipeVC.doneButtonDestination = "viewController"
-            
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
         
@@ -122,7 +121,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    
     /* View */
     
     override func viewDidLoad() {
@@ -137,4 +135,3 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
 }
-

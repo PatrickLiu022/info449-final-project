@@ -24,7 +24,6 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     // Defines the number of table cells being displayed
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         // TODO: Modify after fetching
         //return FavRecipes.instance.favRecipes.count
         return FavRecipes.instance.favRecipeNames.count

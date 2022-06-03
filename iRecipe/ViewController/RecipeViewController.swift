@@ -19,12 +19,6 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var viewButton: UIButton!
     
-    // TODO: delete if did NOT end up using
-    // Defines action after pressing the "view" button
-    @IBAction func viewButtonPressed(_ sender: UIButton) {
-        // auto change to ContentViewController (done)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
@@ -42,7 +36,6 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         // TODO: Modify after fetching
         //recipeNameLabel.text = currRecipe.recipeName
         recipeNameLabel.text = currRecipeName

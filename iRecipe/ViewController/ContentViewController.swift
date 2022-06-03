@@ -20,10 +20,8 @@ class ContentViewController: UIViewController {
     // TODO: IBOutlet connections for "instructionsLabel"
     // Do NOT connect the label now; make sure how the data looks like first!!
     
-    
     @IBOutlet weak var favButton: UIButton!
     
-    // Defines action after pressing "done"
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         if doneButtonDestination == "viewController" { // go back to "home"
             if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
