@@ -12,8 +12,7 @@ class RecipeViewController: UIViewController {
     // TODO: Modify after fetching
     //var currRecipe : Recipe = nil
     var currRecipeName : String = ""
-    
-//    var favButtonTitle : String = "" // text displayed on the fav button
+
     var doneButtonDestination = ""   // homeVC or favVC
     
     @IBOutlet weak var recipeNameLabel: UILabel!
@@ -35,7 +34,6 @@ class RecipeViewController: UIViewController {
                 contentVC.currRecipeName = currRecipeName
                 
                 contentVC.doneButtonDestination = doneButtonDestination
-//                contentVC.favButtonTitle = favButtonTitle
             }
         }
     }
@@ -48,7 +46,6 @@ class RecipeViewController: UIViewController {
         // TODO: Modify after fetching
         //recipeNameLabel.text = currRecipe.recipeName
         recipeNameLabel.text = currRecipeName
-        
         // TODO: Uncomment after fetching
         //ingredientsLabel.text = currRecipe.ingredients
     }

@@ -14,16 +14,11 @@ class ContentViewController: UIViewController {
     var currRecipeName : String = ""
     
     var doneButtonDestination : String = ""
-    
-//    var favButtonTitle : String = "" // text displayed on the fav button
-    
 
     // TODO: Modify after fetching
     var instructions : String = ""
     // TODO: IBOutlet connections for "instructionsLabel"
     // Do NOT connect the label now; make sure how the data looks like first!!
-    
-    
     
     
     @IBOutlet weak var favButton: UIButton!
@@ -40,9 +35,6 @@ class ContentViewController: UIViewController {
             }
         }
     }
-    
-    
-    
 
     @IBAction func favButtonPressed(_ sender: UIButton) {
         // TODO: Modify after fetching

@@ -9,10 +9,6 @@ import UIKit
 
 class FavViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-//    //let favRecipes : [Recipe] = []
-//    var favRecipeNames = ["fav recipe 1", "fav recipe 2", "fav recipe 3", "fav recipe 4"] // TODO: DELETE, uncomment above
-//    var favRecipeDescs = ["description 1", "description 2", "description 3", "description 4"] // TODO: DELETE
-    
     @IBOutlet weak var favTableView: UITableView!
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

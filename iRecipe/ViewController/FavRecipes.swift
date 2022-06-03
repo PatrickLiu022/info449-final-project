@@ -11,12 +11,14 @@ class FavRecipes {
     
     static let instance = FavRecipes()
     
+    // TODO: Modify after fetching
     //var favRecipes : [Recipe]
-    var favRecipeNames : [String] // TODO: change to above
+    var favRecipeNames : [String]
     
     init() {
+        // TODO: Modify after fetching
         //self.favRecipes = []
-        self.favRecipeNames = [] // TODO: change to above
+        self.favRecipeNames = []
     }
     
     // TODO: Modify after fetching
