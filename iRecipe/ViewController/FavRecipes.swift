@@ -31,7 +31,7 @@ class FavRecipes {
 //    }
     func favCurrRecipe(_ currRecipeName : String) {
         print("About to fav \(currRecipeName)")
-        favRecipeNames.append(currRecipeName)
+        favRecipeNames.insert(currRecipeName, at: 0)
         print("Done: \(favRecipeNames)")
     }
     func unfavCurrRecipe(_ currRecipeName : String) {
