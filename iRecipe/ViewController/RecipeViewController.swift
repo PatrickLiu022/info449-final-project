@@ -9,10 +9,8 @@ import UIKit
 
 class RecipeViewController: UIViewController {
     
-    // TODO: Modify after fetching
-    //var currRecipe : Recipe = nil
-    var currRecipeName : String = ""
-
+    var currRecipe : Recipe? = nil
+//    var currRecipeName : String = ""
     var doneButtonDestination = ""   // homeVC or favVC
     
     @IBOutlet weak var recipeNameLabel: UILabel!
@@ -22,11 +20,8 @@ class RecipeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
-                
-                // TODO: modify after fetching
-                //contentVC.currRecipe = currRecipe
-                contentVC.currRecipeName = currRecipeName
-                
+                contentVC.currRecipe = currRecipe
+//                contentVC.currRecipeName = currRecipeName
                 contentVC.doneButtonDestination = doneButtonDestination
             }
         }
@@ -36,11 +31,9 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        // TODO: Modify after fetching
-        //recipeNameLabel.text = currRecipe.recipeName
-        recipeNameLabel.text = currRecipeName
-        // TODO: Uncomment after fetching
-        //ingredientsLabel.text = currRecipe.ingredients
+        recipeNameLabel.text = currRecipe!.recipeName
+//        recipeNameLabel.text = currRecipeName
+        ingredientsLabel.text = currRecipe!.ingredients
     }
     
 

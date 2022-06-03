@@ -11,31 +11,26 @@ class FavRecipes {
     
     static let instance = FavRecipes()
     
-    // TODO: Modify after fetching
-    //var favRecipes : [Recipe]
-    var favRecipeNames : [String]
+    var favRecipes : [Recipe]
+//    var favRecipeNames : [String]
     
     init() {
-        // TODO: Modify after fetching
-        //self.favRecipes = []
-        self.favRecipeNames = []
+        self.favRecipes = []
+//        self.favRecipeNames = []
     }
     
-    // TODO: Modify after fetching
-//    func favCurrRecipe(_ currRecipe : Recipe) {
-//    }
-//    func unfavCurrRecipe(_ currRecipe : Recipe) {
-//    }
-//    func setFavButtonTitle(_ recipe : Recipe) {
-//    }
-    func favCurrRecipe(_ currRecipeName : String) {
-        favRecipeNames.insert(currRecipeName, at: 0)
+    func favCurrRecipe(_ currRecipe : Recipe) {
+        favRecipes.insert(currRecipe, at: 0)
     }
-    func unfavCurrRecipe(_ currRecipeName : String) {
-        favRecipeNames = favRecipeNames.filter() { $0 != currRecipeName }
+    
+    func unfavCurrRecipe(_ currRecipe : Recipe) {
+        favRecipes.removeAll { recipe in
+            return recipe.recipeName == currRecipe.recipeName
+        }
     }
-    func setFavButtonTitle(_ currRecipeName : String) -> String {
-        if favRecipeNames.contains(currRecipeName) {
+    
+    func setFavButtonTitle(_ currRecipe : Recipe) -> String {
+        if favRecipes.contains(where: { $0.recipeName == currRecipe.recipeName }) {
             return "Unsave from Fav"
         } else {
             return "Save to Fav"

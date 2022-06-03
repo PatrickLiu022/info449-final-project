@@ -8,10 +8,8 @@
 import Foundation
 
 struct Recipe : Decodable {
-    let recipeName : String        // recipe name
-    let recipeDesc : String   // recipe intro or description
-    let ingredients : [String] // list of ingredients
-    
-    // TODO: Other info about each recipe
-    //let instructions : String // recipe instructions??
+    let recipeName : String
+    let recipeDesc : String
+    let ingredients : String
+    let instructions : String
 }

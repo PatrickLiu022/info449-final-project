@@ -8,24 +8,19 @@
 import UIKit
 
 class SearchTableDataSource: NSObject, UITableViewDataSource {
-    
-    // TODO: Modify after fetching
-    //var results : [Recipe] = []
-    var results : [String]?
+    var results : [Recipe] = []
+//    var results : [String]?
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        
-        // TODO: Modify after fetching
-        //cell.recipeNameLabel.text = results[indexPath.row].recipeName
-        //cell.recipeDescLabel.text = results[indexPath.row].recipeDesc
-        cell.recipeNameLabel.text = results![indexPath.row]
-        
+        cell.recipeNameLabel.text = results[indexPath.row].recipeName
+        cell.recipeDescLabel.text = results[indexPath.row].recipeDesc
+//        cell.recipeNameLabel.text = results![indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results!.count
+        return results.count
     }
 }
 
@@ -33,11 +28,10 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     
     var searchTableDataSource = SearchTableDataSource()
     
-    // TODO: Modify after fetching
-    //var allRecipes : [Recipe] = []
-    var allRecipeNames : [String] = []
-    //var searchResults : [Recipe] = []
-    var searchResults : [String] = []
+    var allRecipes : [Recipe] = []
+    var searchResults : [Recipe] = []
+//    var allRecipeNames : [String] = []
+//    var searchResults : [String] = []
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var noResultLabel: UILabel!
@@ -46,11 +40,9 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var searchTableView: UITableView!
     
     func searchRecipes(_ searchStr : String) {
-        // TODO: Modify after fetching
-        //for recipe in allRecipes {}
-        for recipeName in allRecipeNames { //&& !searchResults.contains(recipeName)
-            if recipeName.lowercased().range(of: searchStr.lowercased()) != nil { // contains the search string
-                searchResults.append(recipeName)
+        for recipe in allRecipes { //&& !searchResults.contains(recipe)
+            if recipe.recipeName.lowercased().range(of: searchStr.lowercased()) != nil { // exists recipes whose names contain the search string
+                searchResults.append(recipe)
             }
         }
     }
@@ -93,20 +85,15 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
-            
-            // TODO: modify after fetching
-            //recipeVC.currRecipe = searchResults[indexPath.row]
-            recipeVC.currRecipeName = searchResults[indexPath.row]
-        
+            recipeVC.currRecipe = searchResults[indexPath.row]
+//            recipeVC.currRecipeName = searchResults[indexPath.row]
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
         
         // updates history record
-        // TODO: modify after fetching
-        //let viewedName = searchResults[indexPath.row].recipeName
-        let viewedRecipeName = searchResults[indexPath.row]
-        
+        let viewedRecipeName = searchResults[indexPath.row].recipeName
+//        let viewedRecipeName = searchResults[indexPath.row]
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
     

@@ -9,13 +9,9 @@ import UIKit
 
 class ContentViewController: UIViewController {
     
-    // TODO: Modify after fetching
-    //var currRecipe : Recipe = nil
-    var currRecipeName : String = ""
-    
+    var currRecipe : Recipe? = nil
+//    var currRecipeName : String = ""
     var doneButtonDestination : String = ""
-
-    // TODO: Modify after fetching
     var instructions : String = ""
     // TODO: IBOutlet connections for "instructionsLabel"
     // Do NOT connect the label now; make sure how the data looks like first!!
@@ -35,17 +31,15 @@ class ContentViewController: UIViewController {
     }
 
     @IBAction func favButtonPressed(_ sender: UIButton) {
-        // TODO: Modify after fetching
-        //if FavRecipes.instance.favRecipes.contains(currRecipe) {} else {}
-        if FavRecipes.instance.favRecipeNames.contains(currRecipeName) { // unfav curr recipe
-            FavRecipes.instance.unfavCurrRecipe(currRecipeName)
+        if FavRecipes.instance.favRecipes.contains(where: { $0.recipeName == currRecipe!.recipeName }) { // unfav curr recipe
+            FavRecipes.instance.unfavCurrRecipe(currRecipe!)
             favButton.setTitle("Save to Fav", for: .normal)
             
             let alert = UIAlertController(title: "Success", message: "Unsaved from Fav!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         } else { // fav curr recipe
-            FavRecipes.instance.favCurrRecipe(currRecipeName)
+            FavRecipes.instance.favCurrRecipe(currRecipe!)
             favButton.setTitle("Unsave from Fav", for: .normal)
             
             let alert = UIAlertController(title: "Success", message: "Saved to Fav!", preferredStyle: .alert)
@@ -58,11 +52,8 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        // TODO: Modify after fetching
-        //let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipe)
-        let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipeName)
-        
+        let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipe!)
+//        let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipeName)
         favButton.setTitle(favButtonTitle, for: .normal)
     }
     
