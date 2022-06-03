@@ -13,12 +13,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     /* Variables */
     
     // Data
-    let recipes : [Recipe] = []
-//    let recipeNames = ["recipe1 for testing", "recipe2 for testing", "recipe3 for testing", "recipe4 for testing", "recipe5 for testing", "recipe16 for testing"]  // TODO: DELETE, uncommet above line
-//    let recipeDescs = ["desc for testing recipe1", "desc for testing recipe2", "desc for testing recipe3", "desc for testing recipe4", "desc for testing recipe5", "desc for testing recipe6"] // TODO: DELETE
+    //let recipes : [Recipe] = []
+    let recipeNames = ["recipe1 for testing", "recipe2 for testing", "recipe3 for testing", "recipe4 for testing", "recipe5 for testing", "recipe16 for testing"]  // TODO: DELETE, uncommet above line
+    let recipeDescs = ["desc for testing recipe1", "desc for testing recipe2", "desc for testing recipe3", "desc for testing recipe4", "desc for testing recipe5", "desc for testing recipe6"] // TODO: DELETE
     
-    var viewedRecipeNames : [String] = [] // the recipe names to be saved in "History"
+    
+    // TODO: Fix Next
     var favRecipeNames : [String] = [] // the recipe names favorited by user
+    
+    
+    
     
     // Fetch Data
     let monitor = NWPathMonitor()
@@ -37,19 +41,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Defines each table cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        cell.recipeNameLabel.text = recipes[indexPath.row].recipeName
-//        cell.recipeNameLabel.text = recipeNames[indexPath.row] // TODO: DELETE, uncommet above line
+        //cell.recipeNameLabel.text = recipes[indexPath.row].recipeName
+        cell.recipeNameLabel.text = recipeNames[indexPath.row] // TODO: DELETE, uncommet above line
         
-        cell.recipeDescLabel.text = recipes[indexPath.row].recipeDesc
-//        cell.recipeDescLabel.text = recipeDescs[indexPath.row] // TODO: DELETE, uncommet above line
+        //cell.recipeDescLabel.text = recipes[indexPath.row].recipeDesc
+        cell.recipeDescLabel.text = recipeDescs[indexPath.row] // TODO: DELETE, uncommet above line
 
         return cell
     }
     
     // Defines the number of table cells being displayed
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count
-//        return recipeNames.count // TODO: DELETE, uncommet above line
+        //return recipes.count
+        return recipeNames.count // TODO: DELETE, uncommet above line
     }
     
     // Defines the height of each table cell
@@ -61,49 +65,45 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
-            recipeVC.recipes = recipes
-//            recipeVC.recipeNames = recipeNames // TODO: DELETE, uncommet above line
+            //recipeVC.recipes = recipes
+            recipeVC.recipeNames = recipeNames // TODO: DELETE, uncommet above line
             recipeVC.indexPathRow = indexPath.row
             
-            // TODO: DELETE if qsd
-//            recipeVC.favButtonTitle = "Save to Fav"
-//            recipeVC.currRecipeName = recipeNames[indexPath.row]
-//            recipeVC.doneButtonDestination = "viewController"
-//
+            // TODO: do NOT delete this!!
+            recipeVC.favButtonTitle = "Save to Fav"
+            recipeVC.currRecipeName = recipeNames[indexPath.row]
+            recipeVC.doneButtonDestination = "viewController"
             
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
         
+        // TODO: Fix Next
         // set fav button title on ContentViewController
-        // TODO: FIX!!!!!!!! DELETE see line 68 as well
-        if let contentVC = storyboard?.instantiateViewController(withIdentifier: "contentViewController") as? ContentViewController {
-            contentVC.favButtonTitle = "Save to Fav"
-        }
+//        if let contentVC = storyboard?.instantiateViewController(withIdentifier: "contentViewController") as? ContentViewController {
+//            contentVC.favButtonTitle = "Save to Fav"
+//        }
+        
+        
+        
         
         // updates history record
-        let viewedName = recipes[indexPath.row].recipeName
-//        let viewedName = recipeNames[indexPath.row] // TODO: DELETE, uncomment above line
-        if viewedRecipeNames.contains(viewedName) {
-            // remove "viewedName" from record
-            viewedRecipeNames = viewedRecipeNames.filter() { $0 != viewedName }
-        }
-        // add "viewed" name to the front of the array
-        viewedRecipeNames.insert(viewedName, at: 0)
-        print(viewedRecipeNames)
+        //let viewedName = recipes[indexPath.row].recipeName
+        let viewedRecipeName = recipeNames[indexPath.row] // TODO: DELETE, uncomment above line
+        ViewHistory.instance.updatesHistory(viewedRecipeName)
+
         
-        // TODO: FIX!!!!!!!!
-        if let historyVC = storyboard?.instantiateViewController(withIdentifier: "historyViewController") as? HistoryViewController {
-            historyVC.historyRecord = "\(viewedRecipeNames)"
-            print("DEBUG: \(historyVC.historyRecord)")
-        }
-        if let favVC = storyboard?.instantiateViewController(withIdentifier: "favViewController") as? FavViewController {
-            favVC.favRecipeNames = favRecipeNames
-        }
+        
+//        // TODO: Fix Next
+//        if let favVC = storyboard?.instantiateViewController(withIdentifier: "favViewController") as? FavViewController {
+//            favVC.favRecipeNames = favRecipeNames
+//        }
     }
     
     /* Data Fetching Methods */
+    
     func loadData() {
         let request = URLRequest(url: URL(string: defaultUrl)!)
+        // TODO: above line will cause app to crash
         URLSession.shared.dataTask(with: request) {
             [weak self] data, response, error in
             guard let _ = self else { return }
@@ -126,7 +126,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-
+    
     /* View */
     
     override func viewDidLoad() {
@@ -141,7 +141,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         loadData()
         
     }
-
 
 }
 

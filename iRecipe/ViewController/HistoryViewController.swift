@@ -13,12 +13,25 @@ class HistoryViewController: UIViewController {
 
     @IBOutlet weak var historyLabel: UILabel!
     
+    func setHistoryLabel() {
+        let currHistory = ViewHistory.instance.viewedRecipeNames
+        if currHistory.count > 0 {
+            historyRecord = "\(currHistory)"
+        }
+        historyLabel.text = "\(historyRecord)"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print("for debugging purpose: \(historyRecord)")
-        historyLabel.text = historyRecord
+        setHistoryLabel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setHistoryLabel()
     }
     
 
