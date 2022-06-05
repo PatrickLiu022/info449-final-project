@@ -10,7 +10,6 @@ import UIKit
 class RecipeViewController: UIViewController {
     
     var currRecipe : Recipe? = nil
-//    var currRecipeName : String = ""
     var doneButtonDestination = ""   // homeVC or favVC
     
     @IBOutlet weak var recipeNameLabel: UILabel!
@@ -21,7 +20,6 @@ class RecipeViewController: UIViewController {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.currRecipe = currRecipe
-//                contentVC.currRecipeName = currRecipeName
                 contentVC.doneButtonDestination = doneButtonDestination
             }
         }
@@ -32,7 +30,6 @@ class RecipeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         recipeNameLabel.text = currRecipe!.recipeName
-//        recipeNameLabel.text = currRecipeName
         ingredientsLabel.text = currRecipe!.ingredients
     }
     

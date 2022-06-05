@@ -15,14 +15,12 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         cell.recipeNameLabel.text = FavRecipes.instance.favRecipes[indexPath.row].recipeName
         cell.recipeDescLabel.text = FavRecipes.instance.favRecipes[indexPath.row].recipeDesc
-//        cell.recipeNameLabel.text = FavRecipes.instance.favRecipeNames[indexPath.row]
         return cell
     }
     
     // Defines the number of table cells being displayed
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FavRecipes.instance.favRecipes.count
-//        return FavRecipes.instance.favRecipeNames.count
     }
     
     // Defines the height of each table cell
@@ -33,7 +31,6 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = FavRecipes.instance.favRecipes[indexPath.row]
-//            recipeVC.currRecipeName = FavRecipes.instance.favRecipeNames[indexPath.row]
             recipeVC.doneButtonDestination = "favViewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }

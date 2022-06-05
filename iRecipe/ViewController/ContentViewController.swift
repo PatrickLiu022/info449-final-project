@@ -10,7 +10,6 @@ import UIKit
 class ContentViewController: UIViewController {
     
     var currRecipe : Recipe? = nil
-//    var currRecipeName : String = ""
     var doneButtonDestination : String = ""
     var instructions : String = ""
     // TODO: IBOutlet connections for "instructionsLabel"
@@ -53,7 +52,6 @@ class ContentViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipe!)
-//        let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipeName)
         favButton.setTitle(favButtonTitle, for: .normal)
     }
     

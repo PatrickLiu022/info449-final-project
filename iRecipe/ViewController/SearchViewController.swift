@@ -9,13 +9,11 @@ import UIKit
 
 class SearchTableDataSource: NSObject, UITableViewDataSource {
     var results : [Recipe] = []
-//    var results : [String]?
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         cell.recipeNameLabel.text = results[indexPath.row].recipeName
         cell.recipeDescLabel.text = results[indexPath.row].recipeDesc
-//        cell.recipeNameLabel.text = results![indexPath.row]
         return cell
     }
     
@@ -30,8 +28,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     
     var allRecipes : [Recipe] = []
     var searchResults : [Recipe] = []
-//    var allRecipeNames : [String] = []
-//    var searchResults : [String] = []
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var noResultLabel: UILabel!
@@ -86,14 +82,12 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = searchResults[indexPath.row]
-//            recipeVC.currRecipeName = searchResults[indexPath.row]
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
         
         // updates history record
         let viewedRecipeName = searchResults[indexPath.row].recipeName
-//        let viewedRecipeName = searchResults[indexPath.row]
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
     

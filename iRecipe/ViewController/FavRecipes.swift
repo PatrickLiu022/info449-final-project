@@ -12,11 +12,9 @@ class FavRecipes {
     static let instance = FavRecipes()
     
     var favRecipes : [Recipe]
-//    var favRecipeNames : [String]
     
     init() {
         self.favRecipes = []
-//        self.favRecipeNames = []
     }
     
     func favCurrRecipe(_ currRecipe : Recipe) {
