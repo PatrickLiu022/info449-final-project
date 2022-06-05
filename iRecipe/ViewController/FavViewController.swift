@@ -34,6 +34,10 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
             recipeVC.doneButtonDestination = "favViewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
+        
+        // updates history record
+        let viewedRecipeName = FavRecipes.instance.favRecipes[indexPath.row].recipeName
+        ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
     
     override func viewDidLoad() {
