@@ -13,14 +13,14 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        cell.recipeNameLabel.text = FavRecipes.instance.favRecipes[indexPath.row].title
-        cell.recipeCaloriesLabel.text = "Calories: \(FavRecipes.instance.favRecipes[indexPath.row].calories)"
+        cell.recipeNameLabel.text = FavRecipe.instance.favRecipes[indexPath.row].title
+        cell.recipeCaloriesLabel.text = "Calories: \(FavRecipe.instance.favRecipes[indexPath.row].calories)"
         return cell
     }
 
     // Defines the number of table cells being displayed
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return FavRecipes.instance.favRecipes.count
+        return FavRecipe.instance.favRecipes.count
     }
 
     // Defines the height of each table cell
@@ -30,14 +30,14 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
-            recipeVC.currRecipe = FavRecipes.instance.favRecipes[indexPath.row]
-            recipeVC.currRecipeId = FavRecipes.instance.favRecipes[indexPath.row].id
+            recipeVC.currRecipe = FavRecipe.instance.favRecipes[indexPath.row]
+            recipeVC.currRecipeId = FavRecipe.instance.favRecipes[indexPath.row].id
             recipeVC.doneButtonDestination = "favViewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
 
         // updates history record
-        let viewedRecipeName = FavRecipes.instance.favRecipes[indexPath.row].title
+        let viewedRecipeName = FavRecipe.instance.favRecipes[indexPath.row].title
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
     
