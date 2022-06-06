@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var recipes : [Recipe] = []
     var recipeIds : [Int] = []
+    var recipeImageUrls : [String] = []
 
     // look for 6 recipes satisfying 10 <= carb <= 50
     let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=6&apiKey=f130ece44f9f4817a32b8aaa54c596d1"
@@ -52,6 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = recipes[indexPath.row]
             recipeVC.currRecipeId = recipeIds[indexPath.row]
+            recipeVC.currRecipeImageUrl = recipeImageUrls[indexPath.row]
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
@@ -140,6 +142,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     
                     for recipe in self.recipes {
                         self.recipeIds.append(recipe.id)
+                        self.recipeImageUrls.append(recipe.image)
                     }
                     
                     self.setUpTableView()
