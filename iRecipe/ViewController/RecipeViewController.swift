@@ -8,31 +8,73 @@
 import UIKit
 
 class RecipeViewController: UIViewController {
-    
+
     var currRecipe : Recipe? = nil
+    var currRecipeId : Int = -1
+    var tastes : TasteWidget? = nil
     var doneButtonDestination = ""   // homeVC or favVC
-    
+
     @IBOutlet weak var recipeNameLabel: UILabel!
-    @IBOutlet weak var ingredientsLabel: UILabel!
+    @IBOutlet weak var tastesLabel: UILabel!
     @IBOutlet weak var viewButton: UIButton!
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.currRecipe = currRecipe
+                contentVC.currRecipeId = currRecipeId
                 contentVC.doneButtonDestination = doneButtonDestination
             }
         }
     }
     
+    private func fetchData(_ fetchingUrlStr : String) {
+        let request = URLRequest(url: URL(string: fetchingUrlStr)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data found")
+                return
+            }
+            
+            if let tasteData = try? JSONDecoder().decode(TasteWidget.self, from: data) {
+                DispatchQueue.main.async {
+                    self.tastes = tasteData
+                    
+                    self.tastesLabel.text = "Sweetness: \(self.tastes!.sweetness) \nSaltiness: \(self.tastes!.saltiness) \nSourness: \(self.tastes!.sourness) \nBitterness: \(self.tastes!.bitterness) \nSavoriness: \(self.tastes!.savoriness) \nFattiness: \(self.tastes!.fattiness) \nSpiciness: \(self.tastes!.spiciness)"
+                }
+            } else {
+               print("Failed to fetch data")
+                return
+            }
+        }.resume()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        recipeNameLabel.text = currRecipe!.recipeName
-        ingredientsLabel.text = currRecipe!.ingredients
+        recipeNameLabel.text = currRecipe!.title
+//        tastesLabel.text = currRecipe!.
+        
+        let tasteUrl : String = "https://api.spoonacular.com/recipes/\(self.currRecipeId)/tasteWidget.json?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
+        self.fetchData(tasteUrl)
     }
-    
+
 
     /*
     // MARK: - Navigation

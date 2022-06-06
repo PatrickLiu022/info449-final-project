@@ -10,7 +10,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var recipeNameLabel: UILabel!
-    @IBOutlet weak var recipeDescLabel: UILabel!
+    @IBOutlet weak var recipeCaloriesLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

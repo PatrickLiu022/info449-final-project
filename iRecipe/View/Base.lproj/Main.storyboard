@@ -251,51 +251,54 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="a list of ingredients appears here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-zH-zpH">
-                                <rect key="frame" x="20" y="188" width="374" height="21.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tastes Info Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-zH-zpH">
+                                <rect key="frame" x="100" y="238" width="214" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="fWD-KO-47L"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview Tastes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kf9-Vm-9NN">
+                                <rect key="frame" x="60" y="194" width="136" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRg-Qa-f50">
-                                <rect key="frame" x="179" y="329.5" width="56" height="31"/>
+                                <rect key="frame" x="179" y="631" width="56" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="View"/>
                                 <connections>
                                     <segue destination="Wpv-4h-R1U" kind="show" identifier="recipeToContentVC" id="VY5-cP-cnZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kf9-Vm-9NN">
-                                <rect key="frame" x="20" y="144" width="108" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HnT-kc-li9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="3c9-zH-zpH" firstAttribute="top" secondItem="Kf9-Vm-9NN" secondAttribute="bottom" constant="20" id="6cn-5U-bTF"/>
+                            <constraint firstItem="HnT-kc-li9" firstAttribute="trailing" secondItem="3c9-zH-zpH" secondAttribute="trailing" constant="100" id="Bxx-ei-KXu"/>
                             <constraint firstItem="LAx-E4-86G" firstAttribute="top" secondItem="HnT-kc-li9" secondAttribute="top" constant="40" id="DvH-oH-g4l"/>
-                            <constraint firstItem="Kf9-Vm-9NN" firstAttribute="top" secondItem="HnT-kc-li9" secondAttribute="top" constant="100" id="Gn5-pe-5Qh"/>
-                            <constraint firstItem="3c9-zH-zpH" firstAttribute="leading" secondItem="HnT-kc-li9" secondAttribute="leading" constant="20" id="Hev-2v-x9L"/>
-                            <constraint firstItem="3c9-zH-zpH" firstAttribute="top" secondItem="Kf9-Vm-9NN" secondAttribute="bottom" constant="20" id="Smc-xS-8uc"/>
-                            <constraint firstItem="Kf9-Vm-9NN" firstAttribute="leading" secondItem="HnT-kc-li9" secondAttribute="leading" constant="20" id="W0i-zb-tYV"/>
+                            <constraint firstItem="Kf9-Vm-9NN" firstAttribute="top" secondItem="HnT-kc-li9" secondAttribute="top" constant="150" id="Gn5-pe-5Qh"/>
+                            <constraint firstItem="Kf9-Vm-9NN" firstAttribute="leading" secondItem="HnT-kc-li9" secondAttribute="leading" constant="60" id="W0i-zb-tYV"/>
                             <constraint firstItem="MRg-Qa-f50" firstAttribute="centerX" secondItem="HnT-kc-li9" secondAttribute="centerX" id="ZF9-DM-k0s"/>
-                            <constraint firstItem="MRg-Qa-f50" firstAttribute="top" secondItem="3c9-zH-zpH" secondAttribute="bottom" constant="120" id="f3B-2P-DDa"/>
-                            <constraint firstItem="HnT-kc-li9" firstAttribute="trailing" secondItem="3c9-zH-zpH" secondAttribute="trailing" constant="20" id="rcR-yr-Pc4"/>
+                            <constraint firstItem="HnT-kc-li9" firstAttribute="bottom" secondItem="MRg-Qa-f50" secondAttribute="bottom" constant="200" id="bFn-LN-FLw"/>
+                            <constraint firstItem="3c9-zH-zpH" firstAttribute="leading" secondItem="HnT-kc-li9" secondAttribute="leading" constant="100" id="eey-tO-RPV"/>
                             <constraint firstItem="LAx-E4-86G" firstAttribute="centerX" secondItem="HnT-kc-li9" secondAttribute="centerX" id="sp2-x8-pd6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="X80-xS-QfV"/>
                     <connections>
-                        <outlet property="ingredientsLabel" destination="3c9-zH-zpH" id="RHS-me-ue7"/>
                         <outlet property="recipeNameLabel" destination="LAx-E4-86G" id="t0m-gl-pna"/>
+                        <outlet property="tastesLabel" destination="3c9-zH-zpH" id="RHS-me-ue7"/>
                         <outlet property="viewButton" destination="MRg-Qa-f50" id="Nbd-hL-bJZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ol1-4f-zZg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3814" y="1659"/>
+            <point key="canvasLocation" x="-3814.4927536231885" y="1658.7053571428571"/>
         </scene>
         <!--Content View Controller-->
         <scene sceneID="ORp-iY-h5a">
@@ -305,17 +308,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe instructions here: step 1, 2, 3, 4" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGU-Gp-4lI">
-                                <rect key="frame" x="25" y="144" width="364" height="400"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe instructions here: step 1, 2, 3, 4" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGU-Gp-4lI">
+                                <rect key="frame" x="25" y="74" width="364" height="620"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="0MZ-Lh-SoP"/>
+                                    <constraint firstAttribute="height" constant="620" id="0MZ-Lh-SoP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrd-La-eyy">
-                                <rect key="frame" x="177.5" y="604" width="59" height="31"/>
+                                <rect key="frame" x="177.5" y="694" width="59" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done"/>
                                 <connections>
@@ -323,7 +326,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhG-Yz-6UZ">
-                                <rect key="frame" x="256" y="69" width="133" height="31"/>
+                                <rect key="frame" x="256" y="59" width="133" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Save/Unsave Fav"/>
                                 <connections>
@@ -334,9 +337,9 @@
                         <viewLayoutGuide key="safeArea" id="t8d-yZ-bZo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dhG-Yz-6UZ" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="25" id="6qg-1x-Wr2"/>
-                            <constraint firstItem="lrd-La-eyy" firstAttribute="top" secondItem="dGU-Gp-4lI" secondAttribute="bottom" constant="60" id="Bh1-lV-eXq"/>
-                            <constraint firstItem="dGU-Gp-4lI" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="100" id="PAa-JQ-9ai"/>
+                            <constraint firstItem="dhG-Yz-6UZ" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="15" id="6qg-1x-Wr2"/>
+                            <constraint firstItem="lrd-La-eyy" firstAttribute="top" secondItem="dGU-Gp-4lI" secondAttribute="bottom" id="Bh1-lV-eXq"/>
+                            <constraint firstItem="dGU-Gp-4lI" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="30" id="PAa-JQ-9ai"/>
                             <constraint firstItem="t8d-yZ-bZo" firstAttribute="trailing" secondItem="dGU-Gp-4lI" secondAttribute="trailing" constant="25" id="kwf-GY-EBt"/>
                             <constraint firstItem="lrd-La-eyy" firstAttribute="centerX" secondItem="t8d-yZ-bZo" secondAttribute="centerX" id="lxO-vb-DCe"/>
                             <constraint firstItem="dGU-Gp-4lI" firstAttribute="leading" secondItem="t8d-yZ-bZo" secondAttribute="leading" constant="25" id="p55-X3-78r"/>
@@ -346,6 +349,7 @@
                     <navigationItem key="navigationItem" id="qam-Z4-nbv"/>
                     <connections>
                         <outlet property="favButton" destination="dhG-Yz-6UZ" id="Xd4-8B-znO"/>
+                        <outlet property="instructionLabel" destination="dGU-Gp-4lI" id="qUY-ub-Ncf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDp-r8-oqQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

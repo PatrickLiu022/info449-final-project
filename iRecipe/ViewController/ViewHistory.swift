@@ -8,15 +8,15 @@
 import Foundation
 
 class ViewHistory {
-    
+
     static let instance = ViewHistory()
-    
+
     var viewedRecipeNames : [String]
-    
+
     init() {
         self.viewedRecipeNames = []
     }
-    
+
     func updatesHistory(_ currRecipeName : String) {
         if viewedRecipeNames.contains(currRecipeName) {
             // remove "currRecipeName" from record
@@ -25,5 +25,5 @@ class ViewHistory {
         // add "currRecipeName" to the front of the array
         viewedRecipeNames.insert(currRecipeName, at: 0)
     }
-    
+
 }

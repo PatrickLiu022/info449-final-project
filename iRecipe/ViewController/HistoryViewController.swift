@@ -12,11 +12,15 @@ class HistoryViewController: UIViewController {
     var historyRecord = "No History"
 
     @IBOutlet weak var historyLabel: UILabel!
-    
+
     func setHistoryLabel() {
         let currHistory = ViewHistory.instance.viewedRecipeNames
         if currHistory.count > 0 {
-            historyRecord = "\(currHistory)"
+            var text = ""
+            for recipeName in currHistory {
+                text += "\(recipeName)\n"
+            }
+            historyRecord = text
         }
         historyLabel.text = "\(historyRecord)"
     }
@@ -30,7 +34,7 @@ class HistoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         setHistoryLabel()
     }
     

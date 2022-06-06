@@ -10,33 +10,34 @@ import UIKit
 class FavViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var favTableView: UITableView!
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        cell.recipeNameLabel.text = FavRecipes.instance.favRecipes[indexPath.row].recipeName
-        cell.recipeDescLabel.text = FavRecipes.instance.favRecipes[indexPath.row].recipeDesc
+        cell.recipeNameLabel.text = FavRecipes.instance.favRecipes[indexPath.row].title
+        cell.recipeCaloriesLabel.text = "Calories: \(FavRecipes.instance.favRecipes[indexPath.row].calories)"
         return cell
     }
-    
+
     // Defines the number of table cells being displayed
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FavRecipes.instance.favRecipes.count
     }
-    
+
     // Defines the height of each table cell
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = FavRecipes.instance.favRecipes[indexPath.row]
+            recipeVC.currRecipeId = FavRecipes.instance.favRecipes[indexPath.row].id
             recipeVC.doneButtonDestination = "favViewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
-        
+
         // updates history record
-        let viewedRecipeName = FavRecipes.instance.favRecipes[indexPath.row].recipeName
+        let viewedRecipeName = FavRecipes.instance.favRecipes[indexPath.row].title
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
     
@@ -52,7 +53,7 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         favTableView.reloadData()
     }
 
