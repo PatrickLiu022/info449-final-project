@@ -14,7 +14,7 @@ class RecipeViewController: UIViewController {
     var doneButtonDestination = "" // homeVC or favVC
     
     // for fetching spoonacular API
-    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
+    var API_KEY : String = ""
 
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
@@ -26,6 +26,7 @@ class RecipeViewController: UIViewController {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.currRecipe = currRecipe
                 contentVC.doneButtonDestination = doneButtonDestination
+                contentVC.API_KEY = self.API_KEY
             }
         }
     }

@@ -16,7 +16,7 @@ class ContentViewController: UIViewController {
     var ingredients : [String] = []
     
     // for fetching spoonacular API
-    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
+    var API_KEY : String = ""
     
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!

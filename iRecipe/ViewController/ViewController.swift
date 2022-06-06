@@ -51,6 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = recipes[indexPath.row]
             recipeVC.doneButtonDestination = "viewController"
+            recipeVC.API_KEY = self.API_KEY
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
 
