@@ -185,9 +185,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         monitor.cancel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if !networkAvail {
-            self.fireAlert(alertTitle: "Network not available", alertMessage: "Please connect to a network")
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        if !networkAvail {
+//            self.fireAlert(alertTitle: "Network not available", alertMessage: "Please connect to a network")
+//        }
+//    }
 }

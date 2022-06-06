@@ -326,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ol1-4f-zZg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3814.4927536231885" y="1658.7053571428571"/>
+            <point key="canvasLocation" x="-3858" y="1659"/>
         </scene>
         <!--Content View Controller-->
         <scene sceneID="ORp-iY-h5a">
@@ -337,16 +337,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe instructions here: step 1, 2, 3, 4" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGU-Gp-4lI">
-                                <rect key="frame" x="25" y="74" width="364" height="620"/>
+                                <rect key="frame" x="25" y="273" width="364" height="450"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="620" id="0MZ-Lh-SoP"/>
+                                    <constraint firstAttribute="height" constant="450" id="3EJ-GQ-eAT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrd-La-eyy">
-                                <rect key="frame" x="177.5" y="694" width="59" height="31"/>
+                                <rect key="frame" x="177.5" y="741" width="59" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done"/>
                                 <connections>
@@ -354,29 +354,50 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhG-Yz-6UZ">
-                                <rect key="frame" x="256" y="59" width="133" height="31"/>
+                                <rect key="frame" x="256" y="44" width="133" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Save/Unsave Fav"/>
                                 <connections>
                                     <action selector="favButtonPressed:" destination="Wpv-4h-R1U" eventType="touchUpInside" id="cdg-DN-H6t"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwy-GY-6Jg">
+                                <rect key="frame" x="50" y="79" width="103.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c47-pF-6bm">
+                                <rect key="frame" x="40" y="113" width="334" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="R4P-AV-gPA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="t8d-yZ-bZo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dhG-Yz-6UZ" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="15" id="6qg-1x-Wr2"/>
-                            <constraint firstItem="lrd-La-eyy" firstAttribute="top" secondItem="dGU-Gp-4lI" secondAttribute="bottom" id="Bh1-lV-eXq"/>
-                            <constraint firstItem="dGU-Gp-4lI" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="30" id="PAa-JQ-9ai"/>
+                            <constraint firstItem="Fwy-GY-6Jg" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" constant="35" id="6XX-Xp-Yv3"/>
+                            <constraint firstItem="dhG-Yz-6UZ" firstAttribute="top" secondItem="t8d-yZ-bZo" secondAttribute="top" id="6qg-1x-Wr2"/>
+                            <constraint firstItem="Fwy-GY-6Jg" firstAttribute="leading" secondItem="t8d-yZ-bZo" secondAttribute="leading" constant="50" id="O45-7g-6XU"/>
+                            <constraint firstItem="c47-pF-6bm" firstAttribute="top" secondItem="Fwy-GY-6Jg" secondAttribute="bottom" constant="10" id="WzH-9v-Ow9"/>
+                            <constraint firstItem="c47-pF-6bm" firstAttribute="leading" secondItem="t8d-yZ-bZo" secondAttribute="leading" constant="40" id="XxC-3p-VVj"/>
                             <constraint firstItem="t8d-yZ-bZo" firstAttribute="trailing" secondItem="dGU-Gp-4lI" secondAttribute="trailing" constant="25" id="kwf-GY-EBt"/>
                             <constraint firstItem="lrd-La-eyy" firstAttribute="centerX" secondItem="t8d-yZ-bZo" secondAttribute="centerX" id="lxO-vb-DCe"/>
+                            <constraint firstItem="t8d-yZ-bZo" firstAttribute="bottom" secondItem="lrd-La-eyy" secondAttribute="bottom" constant="70" id="o4r-Ua-HaI"/>
+                            <constraint firstItem="dGU-Gp-4lI" firstAttribute="top" secondItem="c47-pF-6bm" secondAttribute="bottom" constant="10" id="oD7-TZ-c1x"/>
                             <constraint firstItem="dGU-Gp-4lI" firstAttribute="leading" secondItem="t8d-yZ-bZo" secondAttribute="leading" constant="25" id="p55-X3-78r"/>
                             <constraint firstItem="t8d-yZ-bZo" firstAttribute="trailing" secondItem="dhG-Yz-6UZ" secondAttribute="trailing" constant="25" id="rNZ-g6-TyP"/>
+                            <constraint firstItem="t8d-yZ-bZo" firstAttribute="trailing" secondItem="c47-pF-6bm" secondAttribute="trailing" constant="40" id="rmM-IY-gmf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qam-Z4-nbv"/>
                     <connections>
                         <outlet property="favButton" destination="dhG-Yz-6UZ" id="Xd4-8B-znO"/>
+                        <outlet property="ingredientsLabel" destination="c47-pF-6bm" id="5pJ-cK-0Pp"/>
                         <outlet property="instructionLabel" destination="dGU-Gp-4lI" id="qUY-ub-Ncf"/>
                     </connections>
                 </viewController>

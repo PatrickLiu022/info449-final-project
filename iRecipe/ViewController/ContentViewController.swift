@@ -14,7 +14,9 @@ class ContentViewController: UIViewController {
     var doneButtonDestination : String = ""
     
     var steps : [Step] = []
+    var ingredients : [String] = []
     
+    @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var favButton: UIButton!
 
@@ -74,6 +76,14 @@ class ContentViewController: UIViewController {
             if let instructionData = try? JSONDecoder().decode([Instruction].self, from: data) {
                 DispatchQueue.main.async {
                     self.steps = instructionData[0].steps
+                    
+                    for step in self.steps {
+                        for ingredient in step.ingredients {
+                            self.ingredients.append(ingredient.localizedName)
+                        }
+                    }
+                    self.ingredientsLabel.text = "\(self.ingredients)"
+                    
                     var fullStep : String = ""
                     for oneStep in self.steps {
                         fullStep += "\(oneStep.step) "
