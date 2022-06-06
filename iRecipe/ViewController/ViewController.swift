@@ -78,6 +78,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 searchVC.allRecipes = recipes
             }
         }
+        
+        if segue.identifier == "homeToFilterVC" {
+            if let filterVC = segue.destination as? FilterViewController {
+                filterVC.allRecipes = recipes
+                filterVC.MAX_CALORIES = 2000
+            }
+        }
     }
     
     

@@ -129,62 +129,90 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Must contain ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edx-oe-Wvq">
-                                <rect key="frame" x="40" y="118" width="193" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum calories needed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edx-oe-Wvq">
+                                <rect key="frame" x="40" y="98" width="200" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="contained ingredients here" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FUh-Kn-QQB">
-                                <rect key="frame" x="40" y="149" width="201" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="min calories number here" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FUh-Kn-QQB">
+                                <rect key="frame" x="40" y="129" width="192" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="not contained ingredients here" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KIk-KM-Meh">
-                                <rect key="frame" x="40" y="244" width="226" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="max calories number here" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KIk-KM-Meh">
+                                <rect key="frame" x="40" y="209" width="195" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Must NOT to contain ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1n-Qs-UJT">
-                                <rect key="frame" x="40" y="213" width="251" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maximum calories limit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1n-Qs-UJT">
+                                <rect key="frame" x="40" y="178" width="178" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BSL-AT-bKd">
-                                <rect key="frame" x="20" y="369" width="374" height="444"/>
+                                <rect key="frame" x="20" y="314" width="374" height="418"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, no results found :(" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n7q-RK-vcZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBJ-3s-uT3">
-                                <rect key="frame" x="174.5" y="308" width="65" height="31"/>
+                                <rect key="frame" x="174.5" y="263" width="65" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Check"/>
+                                <connections>
+                                    <action selector="checkButtonPressed:" destination="aoL-vB-Ykx" eventType="touchUpInside" id="12w-s5-F0s"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEY-fz-C41">
+                                <rect key="frame" x="169.5" y="742" width="75" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Dismiss"/>
+                                <connections>
+                                    <action selector="dismissButtonPressed:" destination="aoL-vB-Ykx" eventType="touchUpInside" id="hM7-tn-W1c"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Es3-JA-aWO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KIk-KM-Meh" firstAttribute="leading" secondItem="Es3-JA-aWO" secondAttribute="leading" constant="40" id="46q-bp-Vhp"/>
-                            <constraint firstItem="edx-oe-Wvq" firstAttribute="top" secondItem="Es3-JA-aWO" secondAttribute="top" constant="30" id="5WV-EL-qQQ"/>
+                            <constraint firstItem="edx-oe-Wvq" firstAttribute="top" secondItem="Es3-JA-aWO" secondAttribute="top" constant="10" id="5WV-EL-qQQ"/>
                             <constraint firstItem="FUh-Kn-QQB" firstAttribute="leading" secondItem="Es3-JA-aWO" secondAttribute="leading" constant="40" id="6hc-XQ-oMH"/>
                             <constraint firstItem="KIk-KM-Meh" firstAttribute="top" secondItem="D1n-Qs-UJT" secondAttribute="bottom" constant="10" id="8l8-gS-Mij"/>
-                            <constraint firstItem="kBJ-3s-uT3" firstAttribute="top" secondItem="KIk-KM-Meh" secondAttribute="bottom" constant="30" id="A5w-Hb-KKC"/>
+                            <constraint firstItem="kBJ-3s-uT3" firstAttribute="top" secondItem="KIk-KM-Meh" secondAttribute="bottom" constant="20" id="A5w-Hb-KKC"/>
                             <constraint firstItem="kBJ-3s-uT3" firstAttribute="centerX" secondItem="Es3-JA-aWO" secondAttribute="centerX" id="D6h-fJ-0af"/>
                             <constraint firstItem="edx-oe-Wvq" firstAttribute="leading" secondItem="Es3-JA-aWO" secondAttribute="leading" constant="40" id="DFY-kQ-LtP"/>
                             <constraint firstItem="BSL-AT-bKd" firstAttribute="leading" secondItem="Es3-JA-aWO" secondAttribute="leading" constant="20" id="JUZ-Gc-ZLF"/>
                             <constraint firstItem="D1n-Qs-UJT" firstAttribute="leading" secondItem="Es3-JA-aWO" secondAttribute="leading" constant="40" id="OMt-vy-nWi"/>
                             <constraint firstItem="Es3-JA-aWO" firstAttribute="trailing" secondItem="BSL-AT-bKd" secondAttribute="trailing" constant="20" id="Tgu-2a-oWe"/>
-                            <constraint firstItem="BSL-AT-bKd" firstAttribute="top" secondItem="kBJ-3s-uT3" secondAttribute="bottom" constant="30" id="UQI-Nb-7ib"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="BSL-AT-bKd" secondAttribute="bottom" id="YH3-XG-uou"/>
-                            <constraint firstItem="D1n-Qs-UJT" firstAttribute="top" secondItem="FUh-Kn-QQB" secondAttribute="bottom" constant="30" id="nxB-ea-y7H"/>
+                            <constraint firstItem="BSL-AT-bKd" firstAttribute="top" secondItem="kBJ-3s-uT3" secondAttribute="bottom" constant="20" id="UQI-Nb-7ib"/>
+                            <constraint firstItem="Es3-JA-aWO" firstAttribute="bottom" secondItem="UEY-fz-C41" secondAttribute="bottom" constant="40" id="YNU-G7-bdW"/>
+                            <constraint firstItem="UEY-fz-C41" firstAttribute="top" secondItem="BSL-AT-bKd" secondAttribute="bottom" constant="10" id="fIY-kJ-aJz"/>
+                            <constraint firstItem="D1n-Qs-UJT" firstAttribute="top" secondItem="FUh-Kn-QQB" secondAttribute="bottom" constant="15" id="nxB-ea-y7H"/>
                             <constraint firstItem="FUh-Kn-QQB" firstAttribute="top" secondItem="edx-oe-Wvq" secondAttribute="bottom" constant="10" id="sqR-4L-udn"/>
+                            <constraint firstItem="UEY-fz-C41" firstAttribute="centerX" secondItem="Es3-JA-aWO" secondAttribute="centerX" id="ykg-GX-6CV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dmh-bd-mAP"/>
+                    <connections>
+                        <outlet property="checkButton" destination="kBJ-3s-uT3" id="1OV-74-nbC"/>
+                        <outlet property="dismissButton" destination="UEY-fz-C41" id="E9M-JW-z9v"/>
+                        <outlet property="filterTableView" destination="BSL-AT-bKd" id="sTf-eK-ZbB"/>
+                        <outlet property="maxCaloriesTextField" destination="KIk-KM-Meh" id="WUZ-7d-9x2"/>
+                        <outlet property="minCaloriesTextField" destination="FUh-Kn-QQB" id="Ama-az-kGp"/>
+                        <outlet property="noResultLabel" destination="n7q-RK-vcZ" id="gOE-DY-jPQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5m-OM-TR2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010" y="2466"/>
+            <point key="canvasLocation" x="-1010.144927536232" y="2465.625"/>
         </scene>
         <!--Home-->
         <scene sceneID="geb-M7-SsH">
