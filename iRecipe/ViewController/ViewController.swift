@@ -19,9 +19,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // look for 6 recipes satisfying 10 <= carb <= 50
     let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=6&apiKey=f130ece44f9f4817a32b8aaa54c596d1"
 
-//    // Network
-//    let monitor = NWPathMonitor()
-//    var networkAvail = false
+    // Network
+    let monitor = NWPathMonitor()
+    var networkAvail : Bool = false
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -159,37 +159,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.fetchData(self.recipeUrl)
-        
-//        // check network
-//        monitor.pathUpdateHandler = { path in
-//            if path.status == .satisfied { // connected to network
-//                self.networkAvail = true
-//
-//                // fetch data
-//                self.fetchData(self.urlStrGenInfo)
-//            }
-            
-//            // TODO: handle local
-//            else { // network not available
-//                self.networkAvail = false
-//
+    
+        // check network
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied { // connected to network
+                self.networkAvail = true
+                
+                // fetch data
+                self.fetchData(self.recipeUrl)
+            } else { // network not available
+                self.networkAvail = false
+                
+//                // TODO: handle local
 //                // load local data
 //                if let localData = self.readLocalData(forName: "data") {
 //                    self.genInfo = try! JSONDecoder().decode([Recipe].self, from: localData)
 //                }
 //                self.setUpTableView()
-//            }
-//        }
-//
-//        // set up dispatch queue for delegate
-//        let queue = DispatchQueue(label: "Monitor")
-//        monitor.start(queue: queue)
-//        monitor.cancel()
-        
-//        // send alert if network not available
-//        if !networkAvail {
-//            fireAlert(alertTitle: "Network not available", alertMessage: "Loaded local data")
-//        }
+            }
+        }
+
+        // set up dispatch queue for delegate
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+        monitor.cancel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !networkAvail {
+            self.fireAlert(alertTitle: "Network not available", alertMessage: "Please connect to a network")
+        }
     }
 }
