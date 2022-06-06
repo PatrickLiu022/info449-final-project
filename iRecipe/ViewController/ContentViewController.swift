@@ -15,6 +15,9 @@ class ContentViewController: UIViewController {
     var steps : [Step] = []
     var ingredients : [String] = []
     
+    // for fetching spoonacular API
+    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
+    
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var favButton: UIButton!
@@ -100,7 +103,7 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let instructionUrl = "https://api.spoonacular.com/recipes/\(self.currRecipe!.id)/analyzedInstructions?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
+        let instructionUrl = "https://api.spoonacular.com/recipes/\(self.currRecipe!.id)/analyzedInstructions?apiKey=\(self.API_KEY)"
         self.fetchData(instructionUrl)
         
         let favButtonTitle = FavRecipe.instance.setFavButtonTitle(currRecipe!)

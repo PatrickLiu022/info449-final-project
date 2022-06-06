@@ -14,9 +14,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     /* Variables */
     
     var recipes : [Recipe] = []
-
-    // look for 6 recipes satisfying 10 <= carb <= 50
-    let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=6&apiKey=f130ece44f9f4817a32b8aaa54c596d1"
+    
+    // for fetching spoonacular API
+    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
 
     // Network
     let monitor = NWPathMonitor()
@@ -122,6 +122,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let recipeData = try? JSONDecoder().decode([Recipe].self, from: data) {
                 DispatchQueue.main.async {
                     self.recipes = recipeData
+                    self.recipes.remove(at: 3)
                     self.setUpTableView()
                     self.tableView.reloadData()
                 }
@@ -139,6 +140,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        // look for recipes with 10 <= carb <= 50
+        let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=7&apiKey=\(self.API_KEY)"
     
         // check network
         monitor.pathUpdateHandler = { path in
@@ -146,7 +150,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.networkAvail = true
                 
                 // fetch data
-                self.fetchData(self.recipeUrl)
+                self.fetchData(recipeUrl)
             } else { // network not available
                 self.networkAvail = false
                 
