@@ -69,7 +69,6 @@ class RecipeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         recipeNameLabel.text = currRecipe!.title
-//        tastesLabel.text = currRecipe!.
         
         let tasteUrl : String = "https://api.spoonacular.com/recipes/\(self.currRecipeId)/tasteWidget.json?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
         self.fetchData(tasteUrl)
