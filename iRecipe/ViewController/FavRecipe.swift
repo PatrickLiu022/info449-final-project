@@ -7,9 +7,9 @@
 
 import Foundation
 
-class FavRecipes {
+class FavRecipe {
 
-    static let instance = FavRecipes()
+    static let instance = FavRecipe()
 
     var favRecipes : [Recipe]
 

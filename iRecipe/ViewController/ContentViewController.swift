@@ -31,15 +31,15 @@ class ContentViewController: UIViewController {
     }
 
     @IBAction func favButtonPressed(_ sender: UIButton) {
-        if FavRecipes.instance.favRecipes.contains(where: { $0.title == currRecipe!.title }) { // unfav curr recipe
-            FavRecipes.instance.unfavCurrRecipe(currRecipe!)
+        if FavRecipe.instance.favRecipes.contains(where: { $0.title == currRecipe!.title }) { // unfav curr recipe
+            FavRecipe.instance.unfavCurrRecipe(currRecipe!)
             favButton.setTitle("Save to Fav", for: .normal)
 
             let alert = UIAlertController(title: "Success", message: "Unsaved from Fav!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         } else { // fav curr recipe
-            FavRecipes.instance.favCurrRecipe(currRecipe!)
+            FavRecipe.instance.favCurrRecipe(currRecipe!)
             favButton.setTitle("Unsave from Fav", for: .normal)
 
             let alert = UIAlertController(title: "Success", message: "Saved to Fav!", preferredStyle: .alert)
@@ -94,7 +94,7 @@ class ContentViewController: UIViewController {
         let instructionUrl = "https://api.spoonacular.com/recipes/\(self.currRecipeId)/analyzedInstructions?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
         self.fetchData(instructionUrl)
         
-        let favButtonTitle = FavRecipes.instance.setFavButtonTitle(currRecipe!)
+        let favButtonTitle = FavRecipe.instance.setFavButtonTitle(currRecipe!)
         favButton.setTitle(favButtonTitle, for: .normal)
     }
 

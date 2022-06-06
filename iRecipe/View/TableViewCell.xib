@@ -30,18 +30,27 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvQ-to-cV9">
-                        <rect key="frame" x="247" y="35" width="38" height="21"/>
+                        <rect key="frame" x="247" y="59" width="38" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="linkColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9V1-iV-h68">
+                        <rect key="frame" x="240" y="5" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="3sn-sX-MwA"/>
+                            <constraint firstAttribute="height" constant="50" id="dhM-eC-MG6"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="QvQ-to-cV9" secondAttribute="trailing" constant="35" id="1Pz-pR-zIO"/>
                     <constraint firstItem="6lB-XA-DYJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="I9Q-EG-b3k"/>
                     <constraint firstItem="ooS-8p-Obl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="OqP-Jn-uEK"/>
+                    <constraint firstItem="9V1-iV-h68" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="f3l-h8-wog"/>
                     <constraint firstAttribute="bottomMargin" secondItem="6lB-XA-DYJ" secondAttribute="bottom" id="iEJ-PA-GKr"/>
-                    <constraint firstItem="QvQ-to-cV9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="k2S-QG-lBb"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="QvQ-to-cV9" secondAttribute="bottom" id="o76-bR-woP"/>
+                    <constraint firstAttribute="trailing" secondItem="9V1-iV-h68" secondAttribute="trailing" constant="30" id="osc-ms-q9r"/>
                     <constraint firstItem="ooS-8p-Obl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="pkC-3O-S1B"/>
                     <constraint firstAttribute="trailing" secondItem="6lB-XA-DYJ" secondAttribute="trailing" constant="20" id="uT3-ME-enV"/>
                     <constraint firstAttribute="trailing" secondItem="ooS-8p-Obl" secondAttribute="trailing" constant="60" id="z6k-GY-TNt"/>
@@ -50,6 +59,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="recipeCaloriesLabel" destination="6lB-XA-DYJ" id="Krw-wh-VET"/>
+                <outlet property="recipeImageView" destination="9V1-iV-h68" id="08l-5e-4FP"/>
                 <outlet property="recipeNameLabel" destination="ooS-8p-Obl" id="R5O-wB-1Mg"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="110.15625"/>

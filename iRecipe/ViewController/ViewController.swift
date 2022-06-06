@@ -15,13 +15,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var recipes : [Recipe] = []
     var recipeIds : [Int] = []
+    
+    
+    
+    
+    
+    var recipeImageUrls : [String] = []
+    
+    
+    
+    
+    
+    
+    
 
     // look for 6 recipes satisfying 10 <= carb <= 50
     let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=6&apiKey=f130ece44f9f4817a32b8aaa54c596d1"
 
-    // Network
-    let monitor = NWPathMonitor()
-    var networkAvail : Bool = false
+//    // Network
+//    let monitor = NWPathMonitor()
+//    var networkAvail : Bool = false
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,6 +46,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         cell.recipeNameLabel.text = recipes[indexPath.row].title
         cell.recipeCaloriesLabel.text = "Calories: \(recipes[indexPath.row].calories)"
+        cell.recipeImageView.image = RecipeImage.instance.imageData[indexPath.row]
         return cell
     }
     
@@ -140,6 +154,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     
                     for recipe in self.recipes {
                         self.recipeIds.append(recipe.id)
+                        self.recipeImageUrls.append(recipe.image)
+                    }
+                    
+                    for imageUrl in self.recipeImageUrls {
+                        self.fetchImage(imageUrl)
                     }
                     
                     self.setUpTableView()
@@ -152,6 +171,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }.resume()
     }
     
+    private func fetchImage(_ imageUrl : String) {
+        let request = URLRequest(url: URL(string: imageUrl)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard let _ = self else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            if let imageData = data {
+                DispatchQueue.main.async {
+                    let image = UIImage(data: imageData)
+                    RecipeImage.instance.imageData.append(image!)
+                    print(RecipeImage.instance.imageData.count)
+                }
+            } else {
+                print("Failed to fetch image data")
+                return
+            }
+        }.resume()
+    }
+    
     
     /* View */
     
@@ -159,35 +209,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-    
-        // check network
-        monitor.pathUpdateHandler = { path in
-            if path.status == .satisfied { // connected to network
-                self.networkAvail = true
-                
-                // fetch data
-                self.fetchData(self.recipeUrl)
-            } else { // network not available
-                self.networkAvail = false
-                
+        self.fetchData(self.recipeUrl)
+
+        
+        
+//        // check network
+//        monitor.pathUpdateHandler = { path in
+//            if path.status == .satisfied { // connected to network
+//                self.networkAvail = true
+//
+//                // fetch data
+//                self.fetchData(self.recipeUrl)
+//            } else { // network not available
+//                self.networkAvail = false
+//
 //                // TODO: handle local
 //                // load local data
 //                if let localData = self.readLocalData(forName: "data") {
 //                    self.genInfo = try! JSONDecoder().decode([Recipe].self, from: localData)
 //                }
 //                self.setUpTableView()
-            }
-        }
-
-        // set up dispatch queue for delegate
-        let queue = DispatchQueue(label: "Monitor")
-        monitor.start(queue: queue)
-        monitor.cancel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if !networkAvail {
-            self.fireAlert(alertTitle: "Network not available", alertMessage: "Please connect to a network")
-        }
+//            }
+//        }
+//
+//        // set up dispatch queue for delegate
+//        let queue = DispatchQueue(label: "Monitor")
+//        monitor.start(queue: queue)
+//        monitor.cancel()
+//    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        if !networkAvail {
+//            self.fireAlert(alertTitle: "Network not available", alertMessage: "Please connect to a network")
+//        }
     }
 }
