@@ -10,10 +10,8 @@ import UIKit
 class RecipeViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
-    var currRecipeId : Int = -1
-    var currRecipeImageUrl : String? = nil
     var tastes : TasteWidget? = nil
-    var doneButtonDestination = ""   // homeVC or favVC
+    var doneButtonDestination = "" // homeVC or favVC
 
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
@@ -24,7 +22,6 @@ class RecipeViewController: UIViewController {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.currRecipe = currRecipe
-                contentVC.currRecipeId = currRecipeId
                 contentVC.doneButtonDestination = doneButtonDestination
             }
         }
@@ -102,9 +99,9 @@ class RecipeViewController: UIViewController {
         // Do any additional setup after loading the view.
         recipeNameLabel.text = currRecipe!.title
         
-        let tasteUrl : String = "https://api.spoonacular.com/recipes/\(self.currRecipeId)/tasteWidget.json?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
+        let tasteUrl : String = "https://api.spoonacular.com/recipes/\(self.currRecipe!.id)/tasteWidget.json?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
         self.fetchData(tasteUrl)
-        self.fetchImage(self.currRecipeImageUrl!)
+        self.fetchImage(self.currRecipe!.image)
     }
 
 

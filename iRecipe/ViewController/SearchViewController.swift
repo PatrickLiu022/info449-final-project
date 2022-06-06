@@ -8,6 +8,7 @@
 import UIKit
 
 class SearchTableDataSource: NSObject, UITableViewDataSource {
+    
     var results : [Recipe] = []
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,7 +89,6 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = searchResults[indexPath.row]
-            recipeVC.currRecipeId = searchResults[indexPath.row].id
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }

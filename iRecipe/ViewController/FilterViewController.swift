@@ -8,6 +8,7 @@
 import UIKit
 
 class FilterTableDataSource: NSObject, UITableViewDataSource {
+    
     var results : [Recipe] = []
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,6 +34,7 @@ class FilterViewController: UIViewController, UITableViewDelegate {
     
     var MAX_CALORIES : Int = -1
     let MIN_CALORIES : Int = 0
+    
     var allRecipes : [Recipe] = []
     var filterResults : [Recipe] = []
     
@@ -74,8 +76,6 @@ class FilterViewController: UIViewController, UITableViewDelegate {
             } else { // non-valid input(s)
                 fireAlert(alertTitle: "Invalid Inputs", alertMessage: "Please give integer inputs")
             }
-            
-            
         } else if minCaloriesInput != "" { // only minCalories given
             if minCaloriesInput!.isInt {
                 filterRecipes(minCalories: Int(minCaloriesInput!)!, maxCalories: self.MAX_CALORIES)
@@ -127,7 +127,6 @@ class FilterViewController: UIViewController, UITableViewDelegate {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = filterResults[indexPath.row]
-            recipeVC.currRecipeId = filterResults[indexPath.row].id
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }

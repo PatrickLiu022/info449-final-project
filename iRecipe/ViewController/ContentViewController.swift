@@ -10,7 +10,6 @@ import UIKit
 class ContentViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
-    var currRecipeId : Int = -1
     var doneButtonDestination : String = ""
     
     var steps : [Step] = []
@@ -101,7 +100,7 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let instructionUrl = "https://api.spoonacular.com/recipes/\(self.currRecipeId)/analyzedInstructions?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
+        let instructionUrl = "https://api.spoonacular.com/recipes/\(self.currRecipe!.id)/analyzedInstructions?apiKey=f130ece44f9f4817a32b8aaa54c596d1"
         self.fetchData(instructionUrl)
         
         let favButtonTitle = FavRecipe.instance.setFavButtonTitle(currRecipe!)

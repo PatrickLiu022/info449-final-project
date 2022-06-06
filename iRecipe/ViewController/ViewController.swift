@@ -14,8 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     /* Variables */
     
     var recipes : [Recipe] = []
-    var recipeIds : [Int] = []
-    var recipeImageUrls : [String] = []
 
     // look for 6 recipes satisfying 10 <= carb <= 50
     let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=6&apiKey=f130ece44f9f4817a32b8aaa54c596d1"
@@ -52,8 +50,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = recipes[indexPath.row]
-            recipeVC.currRecipeId = recipeIds[indexPath.row]
-            recipeVC.currRecipeImageUrl = recipeImageUrls[indexPath.row]
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
@@ -92,19 +88,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     /* Data Fetching Methods */
     
-//    // Read the local json file
-//    private func readLocalData(forName name: String) -> Data? {
-//        do {
-//            if let bundlePath = Bundle.main.path(forResource: name, ofType: "json"),
-//                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-//                return jsonData
-//            }
-//        } catch {
-//            print(error)
-//        }
-//        return nil
-//    }
-    
     func fireAlert(alertTitle : String, alertMessage : String) {
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -139,12 +122,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let recipeData = try? JSONDecoder().decode([Recipe].self, from: data) {
                 DispatchQueue.main.async {
                     self.recipes = recipeData
-                    
-                    for recipe in self.recipes {
-                        self.recipeIds.append(recipe.id)
-                        self.recipeImageUrls.append(recipe.image)
-                    }
-                    
                     self.setUpTableView()
                     self.tableView.reloadData()
                 }
