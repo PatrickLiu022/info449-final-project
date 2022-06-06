@@ -45,8 +45,14 @@ class SearchViewController: UIViewController, UITableViewDelegate {
 
     @IBAction func checkButtonPressed(_ sender: UIButton) {
         let searchStr = searchTextField.text
-        if searchStr != nil {
+        if searchStr != "" {
             searchRecipes(searchStr!)
+        } else {
+            let alert = UIAlertController(title: "Empty input", message: "Please give a name to search on", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: {
+                NSLog("Notification fired")
+            })
         }
 
         if searchResults.count == 0 { // no results found
