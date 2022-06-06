@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     /* Variables */
     
     var recipes : [Recipe] = []
+    var tastes : TasteWidget? = nil
     
     // for fetching spoonacular API
     let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
@@ -49,7 +50,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
+            
+            
+            
+            
+            print(RecipeData.instance.recipeTastes.count)
+            print(RecipeData.instance.recipeImages.count)
+            
+            
+            
+            
             recipeVC.currRecipe = recipes[indexPath.row]
+            recipeVC.indexPathRow = indexPath.row
             recipeVC.doneButtonDestination = "viewController"
             recipeVC.API_KEY = self.API_KEY
             self.navigationController?.pushViewController(recipeVC, animated: true)
@@ -123,12 +135,82 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let recipeData = try? JSONDecoder().decode([Recipe].self, from: data) {
                 DispatchQueue.main.async {
                     self.recipes = recipeData
-                    self.recipes.remove(at: 3)
+                    self.recipes.remove(at: 3) // 4th recipe doesn't have "ingredient" data
+                    for recipe in self.recipes {
+                        RecipeData.instance.recipeIds.append(recipe.id)
+                        RecipeData.instance.recipeImageUrls.append(recipe.image)
+                    }
                     self.setUpTableView()
                     self.tableView.reloadData()
                 }
             } else {
                 print("Failed to fetch data")
+                return
+            }
+        }.resume()
+    }
+    
+    private func fetchTasteData(_ fetchingUrlStr : String) {
+        let request = URLRequest(url: URL(string: fetchingUrlStr)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data found")
+                return
+            }
+            
+            if let tasteData = try? JSONDecoder().decode(TasteWidget.self, from: data) {
+                DispatchQueue.main.async {
+                    self.tastes = tasteData
+                    let tasteText = "Sweetness: \(self.tastes!.sweetness) \nSaltiness: \(self.tastes!.saltiness) \nSourness: \(self.tastes!.sourness) \nBitterness: \(self.tastes!.bitterness) \nSavoriness: \(self.tastes!.savoriness) \nFattiness: \(self.tastes!.fattiness) \nSpiciness: \(self.tastes!.spiciness)"
+                    RecipeData.instance.recipeTastes.append(tasteText)
+                }
+            } else {
+                print("Failed to fetch data")
+                return
+            }
+        }.resume()
+    }
+    
+    private func fetchImage(_ imageUrl : String) {
+        let request = URLRequest(url: URL(string: imageUrl)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            if let imageData = data {
+                DispatchQueue.main.async {
+                    let image = UIImage(data: imageData)
+                    RecipeData.instance.recipeImages.append(image!)
+                }
+            } else {
+                print("Failed to fetch image data")
                 return
             }
         }.resume()
@@ -144,7 +226,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // look for recipes with 10 <= carb <= 50
         let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=7&apiKey=\(self.API_KEY)"
-    
+        
         // check network
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied { // connected to network
@@ -152,6 +234,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 // fetch data
                 self.fetchData(recipeUrl)
+                
+                
+                
+                
+                for id in RecipeData.instance.recipeIds {
+                    let tasteUrl : String = "https://api.spoonacular.com/recipes/\(id)/tasteWidget.json?apiKey=\(self.API_KEY)"
+                    self.fetchTasteData(tasteUrl)
+                }
+                
+                for imageUrl in RecipeData.instance.recipeImageUrls {
+                    self.fetchImage(imageUrl)
+                }
+                
+                
+                
+                
             } else { // network not available
                 self.networkAvail = false
                 

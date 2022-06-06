@@ -10,7 +10,8 @@ import UIKit
 class RecipeViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
-    var tastes : TasteWidget? = nil
+    var indexPathRow : Int = -1
+//    var tastes : TasteWidget? = nil
     var doneButtonDestination = "" // homeVC or favVC
     
     // for fetching spoonacular API
@@ -31,81 +32,83 @@ class RecipeViewController: UIViewController {
         }
     }
     
-    private func fetchData(_ fetchingUrlStr : String) {
-        let request = URLRequest(url: URL(string: fetchingUrlStr)!)
-        
-        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
-            
-            guard let self = self else { return }
-            
-            guard error == nil else {
-                print("Cannot parse data")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
-            else {
-                print("Error with http response")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data found")
-                return
-            }
-            
-            if let tasteData = try? JSONDecoder().decode(TasteWidget.self, from: data) {
-                DispatchQueue.main.async {
-                    self.tastes = tasteData
-                    
-                    self.tastesLabel.text = "Sweetness: \(self.tastes!.sweetness) \nSaltiness: \(self.tastes!.saltiness) \nSourness: \(self.tastes!.sourness) \nBitterness: \(self.tastes!.bitterness) \nSavoriness: \(self.tastes!.savoriness) \nFattiness: \(self.tastes!.fattiness) \nSpiciness: \(self.tastes!.spiciness)"
-                }
-            } else {
-                print("Failed to fetch data")
-                return
-            }
-        }.resume()
-    }
+//    private func fetchData(_ fetchingUrlStr : String) {
+//        let request = URLRequest(url: URL(string: fetchingUrlStr)!)
+//
+//        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+//
+//            guard let self = self else { return }
+//
+//            guard error == nil else {
+//                print("Cannot parse data")
+//                return
+//            }
+//
+//            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+//            else {
+//                print("Error with http response")
+//                return
+//            }
+//
+//            guard let data = data else {
+//                print("No data found")
+//                return
+//            }
+//
+//            if let tasteData = try? JSONDecoder().decode(TasteWidget.self, from: data) {
+//                DispatchQueue.main.async {
+//                    self.tastes = tasteData
+//
+//                    self.tastesLabel.text = "Sweetness: \(self.tastes!.sweetness) \nSaltiness: \(self.tastes!.saltiness) \nSourness: \(self.tastes!.sourness) \nBitterness: \(self.tastes!.bitterness) \nSavoriness: \(self.tastes!.savoriness) \nFattiness: \(self.tastes!.fattiness) \nSpiciness: \(self.tastes!.spiciness)"
+//                }
+//            } else {
+//                print("Failed to fetch data")
+//                return
+//            }
+//        }.resume()
+//    }
     
-    private func fetchImage(_ imageUrl : String) {
-        let request = URLRequest(url: URL(string: imageUrl)!)
-        
-        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
-            
-            guard let self = self else { return }
-            
-            guard error == nil else {
-                print("Cannot parse data")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
-            else {
-                print("Error with http response")
-                return
-            }
-            
-            if let imageData = data {
-                DispatchQueue.main.async {
-                    let image = UIImage(data: imageData)
-                    self.recipeImageView.image = image
-                }
-            } else {
-                print("Failed to fetch image data")
-                return
-            }
-        }.resume()
-    }
+//    private func fetchImage(_ imageUrl : String) {
+//        let request = URLRequest(url: URL(string: imageUrl)!)
+//        
+//        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+//            
+//            guard let self = self else { return }
+//            
+//            guard error == nil else {
+//                print("Cannot parse data")
+//                return
+//            }
+//            
+//            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+//            else {
+//                print("Error with http response")
+//                return
+//            }
+//            
+//            if let imageData = data {
+//                DispatchQueue.main.async {
+//                    let image = UIImage(data: imageData)
+//                    self.recipeImageView.image = image
+//                }
+//            } else {
+//                print("Failed to fetch image data")
+//                return
+//            }
+//        }.resume()
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        recipeNameLabel.text = currRecipe!.title
+        self.recipeNameLabel.text = currRecipe!.title
+        self.tastesLabel.text = RecipeData.instance.recipeTastes[indexPathRow]
+        self.recipeImageView.image = RecipeData.instance.recipeImages[indexPathRow]
         
-        let tasteUrl : String = "https://api.spoonacular.com/recipes/\(self.currRecipe!.id)/tasteWidget.json?apiKey=\(self.API_KEY)"
-        self.fetchData(tasteUrl)
-        self.fetchImage(self.currRecipe!.image)
+//        let tasteUrl : String = "https://api.spoonacular.com/recipes/\(self.currRecipe!.id)/tasteWidget.json?apiKey=\(self.API_KEY)"
+//        self.fetchData(tasteUrl)
+//        self.fetchImage(self.currRecipe!.image)
     }
 
 
