@@ -53,7 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             
             
-            
+            // TODO: Debug
             print(RecipeData.instance.recipeTastes.count)
             print(RecipeData.instance.recipeImages.count)
             
@@ -177,6 +177,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 DispatchQueue.main.async {
                     self.tastes = tasteData
                     let tasteText = "Sweetness: \(self.tastes!.sweetness) \nSaltiness: \(self.tastes!.saltiness) \nSourness: \(self.tastes!.sourness) \nBitterness: \(self.tastes!.bitterness) \nSavoriness: \(self.tastes!.savoriness) \nFattiness: \(self.tastes!.fattiness) \nSpiciness: \(self.tastes!.spiciness)"
+                    
+                    // TODO: Fix!!
+                    // Problem: does not accumulate results
                     RecipeData.instance.recipeTastes.append(tasteText)
                 }
             } else {
@@ -207,6 +210,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let imageData = data {
                 DispatchQueue.main.async {
                     let image = UIImage(data: imageData)
+                    
+                    // TODO: Fix!!
+                    // Problem: does not accumulate results
                     RecipeData.instance.recipeImages.append(image!)
                 }
             } else {
