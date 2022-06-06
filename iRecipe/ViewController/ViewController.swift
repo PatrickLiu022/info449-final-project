@@ -70,15 +70,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-//    /* Method to Pass Data to Other VCs */
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "homeToSearchVC" {
-//            if let searchVC = segue.destination as? SearchViewController {
-//                searchVC.allRecipes = genInfo
-//            }
-//        }
-//    }
+    /* Method to Pass Data to Other VCs */
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "homeToSearchVC" {
+            if let searchVC = segue.destination as? SearchViewController {
+                searchVC.allRecipes = recipes
+            }
+        }
+    }
     
     
     /* Data Fetching Methods */
