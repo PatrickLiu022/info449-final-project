@@ -22,6 +22,7 @@ class RecipeViewController: UIViewController {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.currRecipe = currRecipe
+                contentVC.indexPathRow = self.indexPathRow
                 contentVC.doneButtonDestination = doneButtonDestination
             }
         }
