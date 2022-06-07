@@ -423,16 +423,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Krz-Bf-Aty">
-                                <rect key="frame" x="177.5" y="751" width="59" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Done"/>
-                                <connections>
-                                    <action selector="doneButtonPressed:" destination="3R1-9H-0KV" eventType="touchUpInside" id="Dw9-kM-H1K"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Nutrition Facts Table Rendering..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gGH-Uj-73K">
-                                <rect key="frame" x="30" y="64" width="354" height="667"/>
+                                <rect key="frame" x="30" y="64" width="354" height="678"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -442,11 +434,9 @@
                         <viewLayoutGuide key="safeArea" id="mjE-Gf-PA8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Krz-Bf-Aty" firstAttribute="top" secondItem="gGH-Uj-73K" secondAttribute="bottom" constant="20" id="Cfu-z1-4Xk"/>
                             <constraint firstItem="mjE-Gf-PA8" firstAttribute="trailing" secondItem="gGH-Uj-73K" secondAttribute="trailing" constant="30" id="PWH-QN-ImZ"/>
-                            <constraint firstItem="mjE-Gf-PA8" firstAttribute="bottom" secondItem="Krz-Bf-Aty" secondAttribute="bottom" constant="60" id="dUv-Z6-sTC"/>
+                            <constraint firstItem="mjE-Gf-PA8" firstAttribute="bottom" secondItem="gGH-Uj-73K" secondAttribute="bottom" constant="100" id="gn3-vj-DlB"/>
                             <constraint firstItem="gGH-Uj-73K" firstAttribute="centerX" secondItem="mjE-Gf-PA8" secondAttribute="centerX" id="hby-ea-3xP"/>
-                            <constraint firstItem="Krz-Bf-Aty" firstAttribute="centerX" secondItem="mjE-Gf-PA8" secondAttribute="centerX" id="kjI-FB-8oo"/>
                             <constraint firstItem="gGH-Uj-73K" firstAttribute="top" secondItem="mjE-Gf-PA8" secondAttribute="top" constant="20" id="vs8-y2-VT0"/>
                             <constraint firstItem="gGH-Uj-73K" firstAttribute="leading" secondItem="mjE-Gf-PA8" secondAttribute="leading" constant="30" id="xec-kH-p8j"/>
                         </constraints>

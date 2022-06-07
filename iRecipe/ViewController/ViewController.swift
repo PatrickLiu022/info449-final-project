@@ -5,10 +5,9 @@
 //  Created by Helen Li on 5/30/22.
 //
 
-
 import UIKit
-import Network
 import Foundation
+import SystemConfiguration
 
 
 // Convert HTML to NSAttributedString
@@ -43,11 +42,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var steps : [Step] = []
     
     // for fetching spoonacular API
-    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
-
-    // Network
-    let monitor = NWPathMonitor()
-    var networkAvail : Bool = false
+    let API_KEY = "a044a980ac0a400c93dd6ba930203d0c"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -78,7 +73,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = recipes[indexPath.row]
             recipeVC.indexPathRow = indexPath.row
-            recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
 
@@ -124,18 +118,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard let self = self else { return }
             
             guard error == nil else {
-                print("Cannot parse data")
+                print("Taste Fetching: Cannot parse data")
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
             else {
-                print("Error with http response")
+                print("Taste Fetching: Error with http response")
                 return
             }
             
             guard let data = data else {
-                print("No data found")
+                print("Taste Fetching: No data found")
                 return
             }
             
@@ -148,7 +142,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     RecipeData.instance.recipeTastes.append(tasteText)
                 }
             } else {
-                print("Failed to fetch data")
+                print("Taste Fetching: Failed to fetch data")
                 return
             }
         }.resume()
@@ -162,13 +156,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard self != nil else { return }
             
             guard error == nil else {
-                print("Cannot parse data")
+                print("Image Fetching: Cannot parse data")
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
             else {
-                print("Error with http response")
+                print("Image Fetching: Error with http response")
                 return
             }
             
@@ -180,7 +174,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     RecipeData.instance.recipeImages.append(image!)
                 }
             } else {
-                print("Failed to fetch image data")
+                print("Image Fetching: Failed to fetch image data")
                 return
             }
         }.resume()
@@ -194,18 +188,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard let self = self else { return }
             
             guard error == nil else {
-                print("Cannot parse data")
+                print("Instruction Fetching: Cannot parse data")
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
             else {
-                print("Error with http response")
+                print("Instruction Fetching: Error with http response")
                 return
             }
             
             guard let data = data else {
-                print("No data found")
+                print("Instruction Fetching: No data found")
                 return
             }
             
@@ -230,7 +224,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     RecipeData.instance.fullSteps[id] = fullStep
                 }
             } else {
-                print("Failed to fetch data")
+                print("Instruction Fetching: Failed to fetch data")
                 return
             }
         }.resume()
@@ -244,13 +238,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard self != nil else { return }
             
             guard error == nil else {
-                print("Cannot parse data")
+                print("Nutrition Fetching: Cannot parse data")
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
             else {
-                print("Error with http response")
+                print("Nutrition Fetching: Error with http response")
                 return
             }
             
@@ -262,7 +256,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     RecipeData.instance.nutritionAttrTexts.append(nutritionAttrText!)
                 }
             } else {
-                print("Failed to fetch nutrition html data")
+                print("Nutrition Fetching: Failed to fetch nutrition html data")
                 return
             }
         }.resume()
@@ -276,18 +270,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard let self = self else { return }
             
             guard error == nil else {
-                print("Cannot parse data")
+                print("Nutrition Fetching: Cannot parse data")
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
             else {
-                print("Error with http response")
+                print("Nutrition Fetching: Error with http response")
                 return
             }
             
             guard let data = data else {
-                print("No data found")
+                print("Nutrition Fetching: No data found")
                 return
             }
             
@@ -326,7 +320,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     self.tableView.reloadData()
                 }
             } else {
-                print("Failed to fetch data")
+                print("Nutrition Fetching: Failed to fetch data")
                 return
             }
         }.resume()
@@ -334,6 +328,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     /* View */
+    
+    func internetAvailable() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+        
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
+    }
     
     func fireAlert(alertTitle : String, alertMessage : String) {
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
@@ -352,34 +366,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=7&apiKey=\(self.API_KEY)"
         
         // check network
-        monitor.pathUpdateHandler = { path in
-            if path.status == .satisfied { // connected to network
-                self.networkAvail = true
-                
-                // fetch for recipe data; fetching results saved to the singleton
-                self.fetchRecipeData(recipeUrl)
-            } else { // network not available
-                self.networkAvail = false
-                
-//                // TODO: handle local
-//                // load local data
-//                if let localData = self.readLocalData(forName: "data") {
-//                    self.genInfo = try! JSONDecoder().decode([Recipe].self, from: localData)
-//                }
-//                self.setUpTableView()
-            }
+        if self.internetAvailable() { // connected to network
+            self.fireAlert(alertTitle: "Welcome", alertMessage: "Ready to go!")
+            
+            // fetch for recipe data; fetching results saved to the singleton
+            self.fetchRecipeData(recipeUrl)
+        } else { // network not available
+            self.fireAlert(alertTitle: "Network not available", alertMessage: "Please check your network")
         }
-
-        // set up dispatch queue for delegate
-        let queue = DispatchQueue(label: "Monitor")
-        monitor.start(queue: queue)
-        monitor.cancel()
-        
-        
-//        if networkAvail {
-//            fireAlert(alertTitle: "Welcome", alertMessage: "Ready to go!")
-//        } else {
-//            fireAlert(alertTitle: "Network not available", alertMessage: "Load local data")
-//        }
     }
 }

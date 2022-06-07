@@ -11,7 +11,6 @@
 		6D72A384284DF767005274CA /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D72A383284DF767005274CA /* RecipeData.swift */; };
 		6DB6409F2849C0420096C76B /* ViewHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6409E2849C0420096C76B /* ViewHistory.swift */; };
 		6DB640A12849C5610096C76B /* FavRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB640A02849C5610096C76B /* FavRecipe.swift */; };
-		6DB640D0284A9BD50096C76B /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB640CF284A9BD50096C76B /* data.json */; };
 		6DB677BC2845D64400B00BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB677BB2845D64400B00BAE /* AppDelegate.swift */; };
 		6DB677BE2845D64400B00BAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB677BD2845D64400B00BAE /* SceneDelegate.swift */; };
 		6DB677C02845D64400B00BAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB677BF2845D64400B00BAE /* ViewController.swift */; };
@@ -36,7 +35,6 @@
 		6D72A383284DF767005274CA /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		6DB6409E2849C0420096C76B /* ViewHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHistory.swift; sourceTree = "<group>"; };
 		6DB640A02849C5610096C76B /* FavRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavRecipe.swift; sourceTree = "<group>"; };
-		6DB640CF284A9BD50096C76B /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		6DB677B82845D64400B00BAE /* iRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB677BB2845D64400B00BAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DB677BD2845D64400B00BAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,14 +67,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6DB640CE284A9BC00096C76B /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				6DB640CF284A9BD50096C76B /* data.json */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		6DB677AF2845D64400B00BAE = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +86,6 @@
 		6DB677BA2845D64400B00BAE /* iRecipe */ = {
 			isa = PBXGroup;
 			children = (
-				6DB640CE284A9BC00096C76B /* Data */,
 				6DE2D3A2284862DB00F465EE /* Model */,
 				6DE2D3AC2848661C00F465EE /* View */,
 				6DE2D3AB284865F800F465EE /* ViewController */,
@@ -208,7 +197,6 @@
 				6DB677C82845D64500B00BAE /* LaunchScreen.storyboard in Resources */,
 				6DE2D3AA2848638600F465EE /* TableViewCell.xib in Resources */,
 				6DB677C52845D64500B00BAE /* Assets.xcassets in Resources */,
-				6DB640D0284A9BD50096C76B /* data.json in Resources */,
 				6DB677C32845D64400B00BAE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

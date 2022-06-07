@@ -10,21 +10,8 @@ import UIKit
 class NutritionViewController: UIViewController {
     
     var indexPathRow : Int = -1
-    var doneButtonDestination : String = ""
     
     @IBOutlet weak var nutritionTextView: UITextView!
-    
-    @IBAction func doneButtonPressed(_ sender: UIButton) {
-        if doneButtonDestination == "viewController" { // go back to "home"
-            if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
-                self.navigationController?.pushViewController(mainVC, animated: true)
-            }
-        } else { // go back to "fav"
-            if let favVC = storyboard?.instantiateViewController(withIdentifier: "favViewController") as? FavViewController {
-                self.navigationController?.pushViewController(favVC, animated: true)
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

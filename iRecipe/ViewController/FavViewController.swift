@@ -32,7 +32,6 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = FavRecipe.instance.favRecipes[indexPath.row]
             recipeVC.indexPathRow = indexPath.row
-            recipeVC.doneButtonDestination = "favViewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
 

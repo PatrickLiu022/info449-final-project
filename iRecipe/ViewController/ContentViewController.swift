@@ -11,7 +11,6 @@ class ContentViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
     var indexPathRow : Int = -1
-    var doneButtonDestination : String = ""
     
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
@@ -39,7 +38,6 @@ class ContentViewController: UIViewController {
         if segue.identifier == "contentToNutritionVC" {
             if let nutritionVC = segue.destination as? NutritionViewController {
                 nutritionVC.indexPathRow = self.indexPathRow
-                nutritionVC.doneButtonDestination = self.doneButtonDestination
             }
         }
     }

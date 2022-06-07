@@ -11,7 +11,6 @@ class RecipeViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
     var indexPathRow : Int = -1
-    var doneButtonDestination = "" // homeVC or favVC
 
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
@@ -23,7 +22,6 @@ class RecipeViewController: UIViewController {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.currRecipe = currRecipe
                 contentVC.indexPathRow = self.indexPathRow
-                contentVC.doneButtonDestination = doneButtonDestination
             }
         }
     }
