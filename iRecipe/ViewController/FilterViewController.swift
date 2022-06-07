@@ -127,6 +127,7 @@ class FilterViewController: UIViewController, UITableViewDelegate {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = filterResults[indexPath.row]
+            recipeVC.indexPathRow = indexPath.row
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }

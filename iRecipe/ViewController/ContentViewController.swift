@@ -12,12 +12,6 @@ class ContentViewController: UIViewController {
     var currRecipe : Recipe? = nil
     var doneButtonDestination : String = ""
     
-    var steps : [Step] = []
-    var ingredients : [String] = []
-    
-    // for fetching spoonacular API
-    var API_KEY : String = ""
-    
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var favButton: UIButton!
@@ -52,60 +46,13 @@ class ContentViewController: UIViewController {
         }
     }
     
-    private func fetchData(_ fetchingUrlStr : String) {
-        let request = URLRequest(url: URL(string: fetchingUrlStr)!)
-        
-        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
-            
-            guard let self = self else { return }
-            
-            guard error == nil else {
-                print("Cannot parse data")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
-            else {
-                print("Error with http response")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data found")
-                return
-            }
-            
-            if let instructionData = try? JSONDecoder().decode([Instruction].self, from: data) {
-                DispatchQueue.main.async {
-                    self.steps = instructionData[0].steps
-                    
-                    for step in self.steps {
-                        for ingredient in step.ingredients {
-                            self.ingredients.append(ingredient.localizedName)
-                        }
-                    }
-                    self.ingredientsLabel.text = "\(self.ingredients)"
-                    
-                    var fullStep : String = ""
-                    for oneStep in self.steps {
-                        fullStep += "\(oneStep.step) "
-                    }
-                    self.instructionLabel.text = fullStep
-                }
-            } else {
-                print("Failed to fetch data")
-                return
-            }
-        }.resume()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let instructionUrl = "https://api.spoonacular.com/recipes/\(self.currRecipe!.id)/analyzedInstructions?apiKey=\(self.API_KEY)"
-        self.fetchData(instructionUrl)
-        
+        self.ingredientsLabel.text = "\(RecipeData.instance.ingredientLists[currRecipe!.id]!)"
+        self.instructionLabel.text = RecipeData.instance.fullSteps[currRecipe!.id]
         let favButtonTitle = FavRecipe.instance.setFavButtonTitle(currRecipe!)
         favButton.setTitle(favButtonTitle, for: .normal)
     }
