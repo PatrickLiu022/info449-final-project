@@ -5,11 +5,13 @@
 //  Created by Helen Li on 5/30/22.
 //
 
+
 import UIKit
 import Network
 import Foundation
 
-// Convert HTML to Plain Text
+
+// Convert HTML to NSAttributedString
 extension Data {
     var html2AttributedString: NSAttributedString? {
         do {
@@ -21,6 +23,7 @@ extension Data {
     }
     var html2String: String { html2AttributedString?.string ?? "" }
 }
+
 extension StringProtocol {
     var html2AttributedString: NSAttributedString? {
         Data(utf8).html2AttributedString
@@ -29,21 +32,6 @@ extension StringProtocol {
         html2AttributedString?.string ?? ""
     }
 }
-
-//extension String {
-//    var htmlToAttributedString: NSAttributedString? {
-//        guard let data = data(using: .utf8) else { return nil }
-//        do {
-//            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
-//        } catch {
-//            return nil
-//        }
-//    }
-//
-//    var htmlToString: String {
-//        return htmlToAttributedString?.string ?? ""
-//    }
-//}
 
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -347,6 +335,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     /* View */
     
+    func fireAlert(alertTitle : String, alertMessage : String) {
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: {
+            NSLog("\(alertTitle) fired")
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -378,24 +374,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
         monitor.cancel()
-    }
-    
-    func fireAlert(alertTitle : String, alertMessage : String) {
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: {
-            NSLog("\(alertTitle) fired")
-        })
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        fireAlert(alertTitle: "Welcome", alertMessage: "Ready to go!")
-    }
-
-//    // TODO: handle local
-//    override func viewWillAppear(_ animated: Bool) {
-//        if !networkAvail {
-//            self.fireAlert(alertTitle: "Network not available", alertMessage: "Please connect to a network")
+        
+        
+//        if networkAvail {
+//            fireAlert(alertTitle: "Welcome", alertMessage: "Ready to go!")
+//        } else {
+//            fireAlert(alertTitle: "Network not available", alertMessage: "Load local data")
 //        }
-//    }
+    }
 }
