@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// for fetching
 class Recipe {
     var id : Int             // recipe id
     var name : String        // recipe name

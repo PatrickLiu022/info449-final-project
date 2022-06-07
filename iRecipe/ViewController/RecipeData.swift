@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Network
 
 
 // Convert HTML to NSAttributedString
@@ -37,6 +38,10 @@ class RecipeData {
     static let instance = RecipeData()
     
     var recipes : [Recipe] = [] // an array of all Recipes
+//    var recipesLocal : [RecipeLocal] = []
+    
+    // for accessing ViewController's setUpTableView() method
+    weak var vc : ViewController?
     
     // for fetching
     var recipeGenInfo : [RecipeGenInfo] = []
@@ -44,7 +49,11 @@ class RecipeData {
     var steps : [Step] = []
     
     // for fetching spoonacular API
-    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
+    let API_KEY = "ae80e31ccb4140e1905c5b890ef97d25" // helenli03
+    
+    // Network
+    let monitor = NWPathMonitor()
+    var networkAvail : Bool = false
     
     private func fetchTasteData(index: Int, fetchingUrl: String) {
         let request = URLRequest(url: URL(string: fetchingUrl)!)
@@ -247,6 +256,10 @@ class RecipeData {
                     
                         currIndex += 1
                     }
+                    
+                    // set up the "home" table view and make it load
+                    self.vc!.setUpTableView()
+                    self.vc!.tableView.reloadData()
                 }
             } else {
                 print("Failed to fetch data")
@@ -255,10 +268,45 @@ class RecipeData {
         }.resume()
     }
     
-    func dataSetUp() {
-        // look for recipes with 10 <= carb <= 50
-        let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=7&apiKey=\(self.API_KEY)"
-        self.fetchRecipeData(recipeUrl)
+    private func readLocalJson(forName name: String) -> Data? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: name,
+                                                 ofType: "json"),
+                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return jsonData
+            }
+        } catch {
+            print(error)
+        }
+        
+        return nil
     }
+    
+    func dataSetUp() {
+        // check network
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied { // connected to network
+                self.networkAvail = true
+                
+                // look for recipes with 10 <= carb <= 50
+                let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=7&apiKey=\(self.API_KEY)"
+                
+                // fetch data
+                self.fetchRecipeData(recipeUrl)
+            } else { // network not available
+                self.networkAvail = false
 
+//                // load local data
+//                if let localData = self.readLocalJson(forName: "data") {
+//                    self.recipes = try! JSONDecoder().decode([RecipeLocal].self, from: localData)
+//                }
+//                self.vc!.setUpTableView()
+            }
+        }
+
+        // set up dispatch queue for delegate
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+        monitor.cancel()
+    }
 }

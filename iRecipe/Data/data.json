@@ -1,33 +1,45 @@
 [
-    { "recipeName":"Recipe 1 for testing",
-      "recipeDesc":"Description of recipe 1",
-      "ingredients":"ingredient1, 2, 3, 4, 5",
-      "instructions":"step 1 blah, 2, 3, 4, ...."
+    { "id":12345,
+      "name":"Recipe 1 (testing local)",
+      "calories":350,
+      "tastes":"Spicy",
+      "ingredientList": ["ingredient1", "ingredient2","ingredient3"],
+      "instruction": "step 1 do this, step 2 do that, done!"
     },
-    { "recipeName":"Recipe 2 for testing",
-      "recipeDesc":"Description of recipe 2",
-      "ingredients":"ingredient1, 2, 3, 4, 5",
-      "instructions":"step 1 blah, 2, 3, 4, ...."
+    { "id":12345,
+      "name":"Recipe 2 (testing local)",
+      "calories":100,
+      "tastes":"Spicy",
+      "ingredientList": ["ingredient1", "ingredient2","ingredient3"],
+      "instruction": "step 1 do this, step 2 do that, done!"
     },
-    { "recipeName":"Recipe 3 for testing",
-      "recipeDesc":"Description of recipe 3",
-      "ingredients":"ingredient1, 2, 3, 4, 5",
-      "instructions":"step 1 blah, 2, 3, 4, ...."
+    { "id":12345,
+      "name":"Recipe 3 (testing local)",
+      "calories":0,
+      "tastes":"Spicy",
+      "ingredientList": ["ingredient1", "ingredient2","ingredient3"],
+      "instruction": "step 1 do this, step 2 do that, done!"
     },
-    { "recipeName":"Recipe 4 for testing",
-      "recipeDesc":"Description of recipe 4",
-      "ingredients":"ingredient1, 2, 3, 4, 5",
-      "instructions":"step 1 blah, 2, 3, 4, ...."
+    { "id":12345,
+      "name":"Recipe 4 (testing local)",
+      "calories":100000,
+      "tastes":"Spicy",
+      "ingredientList": ["ingredient1", "ingredient2","ingredient3"],
+      "instruction": "step 1 do this, step 2 do that, done!"
     },
-    { "recipeName":"Recipe 5 for testing",
-      "recipeDesc":"Description of recipe 5",
-      "ingredients":"ingredient1, 2, 3, 4, 5",
-      "instructions":"step 1 blah, 2, 3, 4, ...."
+    { "id":12345,
+      "name":"Recipe 5 (testing local)",
+      "calories":500,
+      "tastes":"Spicy",
+      "ingredientList": ["ingredient1", "ingredient2","ingredient3"],
+      "instruction": "step 1 do this, step 2 do that, done!"
     },
-    { "recipeName":"Recipe 6 for testing",
-      "recipeDesc":"Description of recipe 6",
-      "ingredients":"ingredient1, 2, 3, 4, 5",
-      "instructions":"step 1 blah, 2, 3, 4, ...."
+    { "id":12345,
+      "name":"Recipe 6 (testing local)",
+      "calories":120,
+      "tastes":"Spicy",
+      "ingredientList": ["ingredient1", "ingredient2","ingredient3"],
+      "instruction": "step 1 do this, step 2 do that, done!"
     }
 ]
 

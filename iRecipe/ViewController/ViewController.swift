@@ -6,21 +6,11 @@
 //
 
 import UIKit
-import Network
 import Foundation
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    /* Variables */
-
-    // Network
-    let monitor = NWPathMonitor()
-    var networkAvail : Bool = false
-    
     @IBOutlet weak var tableView: UITableView!
-    
-    
-    /* Table View Methods */
     
     // Defines each table cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,14 +45,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // Set up "home" table view
-    private func setUpTableView() {
+    func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil),
                            forCellReuseIdentifier: "tableViewCell")
     }
-    
-    /* View */
     
 //    func fireAlert(alertTitle : String, alertMessage : String) {
 //        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
@@ -76,41 +64,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        // set up data
+        RecipeData.instance.vc = self
         RecipeData.instance.dataSetUp()
-        self.setUpTableView()
         
-        
-        
-//        // check network
-//        monitor.pathUpdateHandler = { path in
-//            if path.status == .satisfied { // connected to network
-//                self.networkAvail = true
-//
-//                // set up fetched data
-//                RecipeData.instance.dataSetUp()
-//
-//                // set up the table view with fetched data
-//                self.setUpTableView()
-//                self.tableView.reloadData()
-//            } else { // network not available
-//                self.networkAvail = false
-//
-//                // TODO: handle local
-//                // load local data
-//                if let localData = self.readLocalData(forName: "data") {
-//                    self.genInfo = try! JSONDecoder().decode([Recipe].self, from: localData)
-//                }
-//                self.setUpTableView()
-//            }
-//        }
-//
-//        // set up dispatch queue for delegate
-//        let queue = DispatchQueue(label: "Monitor")
-//        monitor.start(queue: queue)
-//        monitor.cancel()
-        
-        
-//        if networkAvail {
+//        if RecipeData.instance.networkAvail {
 //            fireAlert(alertTitle: "Welcome", alertMessage: "Ready to go!")
 //        } else {
 //            fireAlert(alertTitle: "Network not available", alertMessage: "Load local data")
