@@ -13,7 +13,7 @@ class SearchTableDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        cell.recipeNameLabel.text = results[indexPath.row].title
+        cell.recipeNameLabel.text = results[indexPath.row].name
         cell.recipeCaloriesLabel.text = "Calories: \(results[indexPath.row].calories)"
         return cell
     }
@@ -27,7 +27,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     
     var searchTableDataSource = SearchTableDataSource()
 
-    var allRecipes : [Recipe] = []
+    var allRecipes : [Recipe] = RecipeData.instance.recipes
     var searchResults : [Recipe] = []
     
     @IBOutlet weak var searchTextField: UITextField!
@@ -38,7 +38,7 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     
     func searchRecipes(_ searchStr : String) {
         for recipe in allRecipes { //&& !searchResults.contains(recipe)
-            if recipe.title.lowercased().range(of: searchStr.lowercased()) != nil { // exists recipes whose names contain the search string
+            if recipe.name.lowercased().range(of: searchStr.lowercased()) != nil { // exists recipes whose names contain the search string
                 searchResults.append(recipe)
             }
         }
@@ -89,13 +89,12 @@ class SearchViewController: UIViewController, UITableViewDelegate {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = searchResults[indexPath.row]
-            recipeVC.indexPathRow = indexPath.row
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
 
         // updates history record
-        let viewedRecipeName = searchResults[indexPath.row].title
+        let viewedRecipeName = searchResults[indexPath.row].name
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
 

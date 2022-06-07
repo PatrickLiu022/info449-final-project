@@ -7,17 +7,10 @@
 
 import Foundation
 
-//struct Recipe : Decodable {
-//    let recipeName : String
-//    let recipeDesc : String
-//    let ingredients : String
-//    let instructions : String
-//}
-
 // General information of a recipe; look for more information of each recipe by "id"
-struct Recipe : Decodable {
+struct RecipeGenInfo : Decodable {
     let id : Int           // recipe id
-    let title : String     // recipe title
+    let title : String     // recipe name
     let image : String     // image url
     let imageType : String // "jpg"
     let calories : Int     // number of calories

@@ -13,7 +13,7 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        cell.recipeNameLabel.text = FavRecipe.instance.favRecipes[indexPath.row].title
+        cell.recipeNameLabel.text = FavRecipe.instance.favRecipes[indexPath.row].name
         cell.recipeCaloriesLabel.text = "Calories: \(FavRecipe.instance.favRecipes[indexPath.row].calories)"
         return cell
     }
@@ -31,13 +31,12 @@ class FavViewController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = FavRecipe.instance.favRecipes[indexPath.row]
-            recipeVC.indexPathRow = indexPath.row
             recipeVC.doneButtonDestination = "favViewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
 
         // updates history record
-        let viewedRecipeName = FavRecipe.instance.favRecipes[indexPath.row].title
+        let viewedRecipeName = FavRecipe.instance.favRecipes[indexPath.row].name
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
     

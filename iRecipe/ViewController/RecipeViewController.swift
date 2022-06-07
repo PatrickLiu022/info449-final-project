@@ -10,7 +10,6 @@ import UIKit
 class RecipeViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
-    var indexPathRow : Int = -1
     var doneButtonDestination = "" // homeVC or favVC
 
     @IBOutlet weak var recipeNameLabel: UILabel!
@@ -22,7 +21,6 @@ class RecipeViewController: UIViewController {
         if segue.identifier == "recipeToContentVC" {
             if let contentVC = segue.destination as? ContentViewController {
                 contentVC.currRecipe = currRecipe
-                contentVC.indexPathRow = self.indexPathRow
                 contentVC.doneButtonDestination = doneButtonDestination
             }
         }
@@ -32,9 +30,9 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.recipeNameLabel.text = currRecipe!.title
-        self.tastesLabel.text = RecipeData.instance.recipeTastes[indexPathRow]
-        self.recipeImageView.image = RecipeData.instance.recipeImages[indexPathRow]
+        self.recipeNameLabel.text = currRecipe!.name
+        self.tastesLabel.text = currRecipe!.tastes
+        self.recipeImageView.image = currRecipe!.image
     }
 
 

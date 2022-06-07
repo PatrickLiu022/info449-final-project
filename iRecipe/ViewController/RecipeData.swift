@@ -8,24 +8,257 @@
 import Foundation
 import UIKit
 
+
+// Convert HTML to NSAttributedString
+extension Data {
+    var html2AttributedString: NSAttributedString? {
+        do {
+            return try NSAttributedString(data: self, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            print("error:", error)
+            return  nil
+        }
+    }
+    var html2String: String { html2AttributedString?.string ?? "" }
+}
+
+extension StringProtocol {
+    var html2AttributedString: NSAttributedString? {
+        Data(utf8).html2AttributedString
+    }
+    var html2String: String {
+        html2AttributedString?.string ?? ""
+    }
+}
+
+
 class RecipeData {
 
     static let instance = RecipeData()
     
-    var recipeIds : [Int]
-    var recipeTastes : [String]
-    var recipeImageUrls : [String]
-    var recipeImages : [UIImage]
-    var ingredientLists = [Int : [String]]() // mapping from recipe id to all ingredients of that recipe
-    var fullSteps = [Int: String]()          // mapping from recipe id to all steps of that recipe
-    var nutritionAttrTexts : [NSAttributedString]
-
-    init() {
-        self.recipeIds = []
-        self.recipeTastes = []
-        self.recipeImageUrls = []
-        self.recipeImages = []
-        self.nutritionAttrTexts = []
+    var recipes : [Recipe] = [] // an array of all Recipes
+    
+    // for fetching
+    var recipeGenInfo : [RecipeGenInfo] = []
+    var tasteWidget : TasteWidget? = nil
+    var steps : [Step] = []
+    
+    // for fetching spoonacular API
+    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
+    
+    private func fetchTasteData(index: Int, fetchingUrl: String) {
+        let request = URLRequest(url: URL(string: fetchingUrl)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data found")
+                return
+            }
+            
+            if let tasteData = try? JSONDecoder().decode(TasteWidget.self, from: data) {
+                DispatchQueue.main.async {
+                    self.tasteWidget = tasteData
+                    
+                    let tastesText = "Sweetness: \(self.tasteWidget!.sweetness) \nSaltiness: \(self.tasteWidget!.saltiness) \nSourness: \(self.tasteWidget!.sourness) \nBitterness: \(self.tasteWidget!.bitterness) \nSavoriness: \(self.tasteWidget!.savoriness) \nFattiness: \(self.tasteWidget!.fattiness) \nSpiciness: \(self.tasteWidget!.spiciness)"
+                    self.recipes[index].addTastes(tastesText)
+                }
+            } else {
+                print("Failed to fetch data")
+                return
+            }
+        }.resume()
+    }
+    
+    private func fetchImageData(index: Int, fetchingUrl: String) {
+        let request = URLRequest(url: URL(string: fetchingUrl)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard self != nil else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            if let imageData = data {
+                DispatchQueue.main.async {
+                    let image = UIImage(data: imageData)
+                    self!.recipes[index].addImage(image!)
+                }
+            } else {
+                print("Failed to fetch image data")
+                return
+            }
+        }.resume()
+    }
+    
+    private func fetchInstructionData(index: Int, fetchingUrl: String) {
+        let request = URLRequest(url: URL(string: fetchingUrl)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data found")
+                return
+            }
+            
+            if let instructionData = try? JSONDecoder().decode([Instruction].self, from: data) {
+                DispatchQueue.main.async {
+                    self.steps = instructionData[0].steps
+                    
+                    for step in self.steps {
+                        for ingredient in step.ingredients {
+                            self.recipes[index].addIngredients(ingredient.localizedName)
+                        }
+                    }
+                    
+                    // save the full step of the recipe to the singleton
+                    var allSteps : String = ""
+                    for oneStep in self.steps {
+                        allSteps += "\(oneStep.step) "
+                    }
+                    self.recipes[index].addInstruction(allSteps)
+                }
+            } else {
+                print("Failed to fetch data")
+                return
+            }
+        }.resume()
+    }
+    
+    private func fetchNutritionHtml(index: Int, fetchingUrl: String) {
+        let request = URLRequest(url: URL(string: fetchingUrl)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard self != nil else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            // save the nutrition facts html as NSAttributedString in "nutritionAttrTexts" in the singleton
+            if let nutritionHtmlData = data {
+                DispatchQueue.main.async {
+                    let nutritionHtmlText = String(bytes: nutritionHtmlData, encoding: .utf8)
+                    let nutritionAttrText = nutritionHtmlText!.html2AttributedString
+                    
+                    self!.recipes[index].addNutrAttrText(nutritionAttrText!)
+                }
+            } else {
+                print("Failed to fetch nutrition html data")
+                return
+            }
+        }.resume()
+    }
+    
+    private func fetchRecipeData(_ fetchingUrl : String) {
+        let request = URLRequest(url: URL(string: fetchingUrl)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data found")
+                return
+            }
+            
+            if let recipeData = try? JSONDecoder().decode([RecipeGenInfo].self, from: data) {
+                DispatchQueue.main.async {
+                    self.recipeGenInfo = recipeData
+                    self.recipeGenInfo.remove(at: 3) // 4th recipe doesn't have "ingredient" data
+                
+                    // constructs 6 Recipe objects and store them in "recipes"
+                    for info in self.recipeGenInfo {
+                        self.recipes.append(Recipe(recipeId: info.id, recipeName: info.title, recipeImageUrl: info.image, recipeCalories: info.calories))
+                    }
+                    
+                    // for each Recipe in the "recipes" array
+                    var currIndex = 0
+                    for recipe in self.recipes {
+                        
+                        // fetching recipe taste
+                        let tasteUrl : String = "https://api.spoonacular.com/recipes/\(recipe.id)/tasteWidget.json?apiKey=\(self.API_KEY)"
+                        self.fetchTasteData(index: currIndex, fetchingUrl: tasteUrl)
+                        
+                        // fetch image
+                        self.fetchImageData(index: currIndex, fetchingUrl: recipe.imageUrl)
+                        
+                        // fetch instruction
+                        let instructionUrl = "https://api.spoonacular.com/recipes/\(recipe.id)/analyzedInstructions?apiKey=\(self.API_KEY)"
+                        self.fetchInstructionData(index: currIndex, fetchingUrl: instructionUrl)
+                        
+                        // fetch nutrition
+                        let nutritionUrl = "https://api.spoonacular.com/recipes/\(recipe.id)/nutritionLabel?apiKey=\(self.API_KEY)"
+                        self.fetchNutritionHtml(index: currIndex, fetchingUrl: nutritionUrl)
+                    
+                        currIndex += 1
+                    }
+                }
+            } else {
+                print("Failed to fetch data")
+                return
+            }
+        }.resume()
+    }
+    
+    func dataSetUp() {
+        // look for recipes with 10 <= carb <= 50
+        let recipeUrl = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=7&apiKey=\(self.API_KEY)"
+        self.fetchRecipeData(recipeUrl)
     }
 
 }

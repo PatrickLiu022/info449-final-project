@@ -23,12 +23,12 @@ class FavRecipe {
 
     func unfavCurrRecipe(_ currRecipe : Recipe) {
         favRecipes.removeAll { recipe in
-            return recipe.title == currRecipe.title
+            return recipe.name == currRecipe.name
         }
     }
 
     func setFavButtonTitle(_ currRecipe : Recipe) -> String {
-        if favRecipes.contains(where: { $0.title == currRecipe.title }) {
+        if favRecipes.contains(where: { $0.name == currRecipe.name }) {
             return "Unsave from Fav"
         } else {
             return "Save to Fav"

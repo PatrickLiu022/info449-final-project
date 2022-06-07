@@ -13,7 +13,7 @@ class FilterTableDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        cell.recipeNameLabel.text = results[indexPath.row].title
+        cell.recipeNameLabel.text = results[indexPath.row].name
         cell.recipeCaloriesLabel.text = "Calories: \(results[indexPath.row].calories)"
         return cell
     }
@@ -22,6 +22,7 @@ class FilterTableDataSource: NSObject, UITableViewDataSource {
         return results.count
     }
 }
+
 
 // Checks whether the value of a string is an integer
 extension String {
@@ -32,10 +33,10 @@ extension String {
 
 class FilterViewController: UIViewController, UITableViewDelegate {
     
-    var MAX_CALORIES : Int = -1
+    var MAX_CALORIES : Int = 2000
     let MIN_CALORIES : Int = 0
     
-    var allRecipes : [Recipe] = []
+    var allRecipes : [Recipe] = RecipeData.instance.recipes
     var filterResults : [Recipe] = []
     
     var filterTableDataSource = FilterTableDataSource()
@@ -127,13 +128,12 @@ class FilterViewController: UIViewController, UITableViewDelegate {
         // connects to RecipeViewController
         if let recipeVC = storyboard?.instantiateViewController(withIdentifier: "recipeViewController") as? RecipeViewController {
             recipeVC.currRecipe = filterResults[indexPath.row]
-            recipeVC.indexPathRow = indexPath.row
             recipeVC.doneButtonDestination = "viewController"
             self.navigationController?.pushViewController(recipeVC, animated: true)
         }
 
         // updates history record
-        let viewedRecipeName = filterResults[indexPath.row].title
+        let viewedRecipeName = filterResults[indexPath.row].name
         ViewHistory.instance.updatesHistory(viewedRecipeName)
     }
 

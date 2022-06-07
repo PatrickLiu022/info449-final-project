@@ -9,7 +9,7 @@ import UIKit
 
 class NutritionViewController: UIViewController {
     
-    var indexPathRow : Int = -1
+    var currRecipe : Recipe? = nil 
     var doneButtonDestination : String = ""
     
     @IBOutlet weak var nutritionTextView: UITextView!
@@ -30,7 +30,7 @@ class NutritionViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let nutritionAttrText = RecipeData.instance.nutritionAttrTexts[indexPathRow]
+        let nutritionAttrText = currRecipe!.nutritionAttrText
         nutritionTextView.attributedText = nutritionAttrText
     }
     

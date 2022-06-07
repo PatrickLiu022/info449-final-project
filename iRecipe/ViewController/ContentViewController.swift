@@ -10,7 +10,6 @@ import UIKit
 class ContentViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
-    var indexPathRow : Int = -1
     var doneButtonDestination : String = ""
     
     @IBOutlet weak var ingredientsLabel: UILabel!
@@ -18,7 +17,7 @@ class ContentViewController: UIViewController {
     @IBOutlet weak var favButton: UIButton!
 
     @IBAction func favButtonPressed(_ sender: UIButton) {
-        if FavRecipe.instance.favRecipes.contains(where: { $0.title == currRecipe!.title }) { // unfav curr recipe
+        if FavRecipe.instance.favRecipes.contains(where: { $0.name == currRecipe!.name }) { // unfav curr recipe
             FavRecipe.instance.unfavCurrRecipe(currRecipe!)
             favButton.setTitle("Save to Fav", for: .normal)
 
@@ -38,7 +37,7 @@ class ContentViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "contentToNutritionVC" {
             if let nutritionVC = segue.destination as? NutritionViewController {
-                nutritionVC.indexPathRow = self.indexPathRow
+                nutritionVC.currRecipe = self.currRecipe
                 nutritionVC.doneButtonDestination = self.doneButtonDestination
             }
         }
@@ -48,8 +47,8 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.ingredientsLabel.text = "\(RecipeData.instance.ingredientLists[currRecipe!.id]!)"
-        self.instructionLabel.text = RecipeData.instance.fullSteps[currRecipe!.id]
+        self.ingredientsLabel.text = "\(currRecipe!.ingredientList)"
+        self.instructionLabel.text = currRecipe!.instruction
         
         let favButtonTitle = FavRecipe.instance.setFavButtonTitle(currRecipe!)
         favButton.setTitle(favButtonTitle, for: .normal)
