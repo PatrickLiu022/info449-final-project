@@ -14,9 +14,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     /* Variables */
     
     var recipes : [Recipe] = []
+    var isLoading = false
     
     // for fetching spoonacular API
-    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
+    let API_KEY = "f130ece44f9f4817a32b8aaa54c596d1" // wlimath
+    // f130ece44f9f4817a32b8aaa54c596d1 <-- use this one if limit is reached
+    // ed5f10cc83e4459aa76705e7ea396117
 
     // Network
     let monitor = NWPathMonitor()
@@ -99,6 +102,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private func fetchData(_ fetchingUrlStr : String) {
         let request = URLRequest(url: URL(string: fetchingUrlStr)!)
+        self.isLoading = false
         
         URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
             
@@ -134,6 +138,65 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }.resume()
     }
     
+    internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading {
+            fetchMoreData()
+        }
+    }
+    
+    private func fetchMoreData() {
+        if !self.isLoading {
+            self.isLoading = true
+            let start = recipes.count
+            let end = start + 6
+            DispatchQueue.global().async {
+                sleep(2)
+                for i in start...end {
+                    self.fetchDataWithoutReloadingEntireTable()
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.isLoading = false
+                }
+            }
+        }
+    }
+    
+    private func fetchDataWithoutReloadingEntireTable() {
+        let request = URLRequest(url: URL(string: "https://api.spoonacular.com/recipes/random?apiKey=\(self.API_KEY)")!)
+        
+        self.isLoading = false
+        URLSession.shared.dataTask(with: request) {
+            [weak self] data, response, error in
+            
+            guard let self = self else {return}
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response without reloading entire table")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data found")
+                return
+            }
+            
+            if let recipeData = try?
+                JSONDecoder().decode([Recipe].self, from: data) {
+                DispatchQueue.main.async {
+                    self.recipes = recipeData
+                    self.recipes.remove(at: 3)
+                    self.tableView.reloadData()
+                }
+            } else {
+                print("Failed to fetch data")
+                return
+            }
+        }.resume()
+    }
     
     /* View */
     
