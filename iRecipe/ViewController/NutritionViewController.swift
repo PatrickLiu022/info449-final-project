@@ -7,28 +7,12 @@
 
 import UIKit
 
-// Display HTML text
-extension String {
-    var htmlToAttributedString : NSAttributedString? {
-        guard let data = data(using: .utf8) else { return nil }
-        do {
-            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            return nil
-        }
-    }
-    
-    var htmlToString: String {
-        return htmlToAttributedString?.string ?? ""
-    }
-}
-
 class NutritionViewController: UIViewController {
     
     var indexPathRow : Int = -1
     var doneButtonDestination : String = ""
     
-    @IBOutlet weak var nutritionLabel: UILabel!
+    @IBOutlet weak var nutritionTextView: UITextView!
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
         if doneButtonDestination == "viewController" { // go back to "home"
@@ -46,8 +30,8 @@ class NutritionViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let nutritionText = RecipeData.instance.nutritionHtmlTexts[indexPathRow]
-        nutritionLabel.text = nutritionText
+        let nutritionAttrText = RecipeData.instance.nutritionAttrTexts[indexPathRow]
+        nutritionTextView.attributedText = nutritionAttrText
     }
     
 

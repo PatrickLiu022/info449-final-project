@@ -9,6 +9,7 @@ import UIKit
 import Network
 import Foundation
 
+// Convert HTML to Plain Text
 extension Data {
     var html2AttributedString: NSAttributedString? {
         do {
@@ -20,7 +21,6 @@ extension Data {
     }
     var html2String: String { html2AttributedString?.string ?? "" }
 }
-
 extension StringProtocol {
     var html2AttributedString: NSAttributedString? {
         Data(utf8).html2AttributedString
@@ -30,6 +30,20 @@ extension StringProtocol {
     }
 }
 
+//extension String {
+//    var htmlToAttributedString: NSAttributedString? {
+//        guard let data = data(using: .utf8) else { return nil }
+//        do {
+//            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+//        } catch {
+//            return nil
+//        }
+//    }
+//
+//    var htmlToString: String {
+//        return htmlToAttributedString?.string ?? ""
+//    }
+//}
 
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -41,7 +55,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var steps : [Step] = []
     
     // for fetching spoonacular API
-    let API_KEY = "ae80e31ccb4140e1905c5b890ef97d25"
+    let API_KEY = "ed5f10cc83e4459aa76705e7ea396117" // wlimath
 
     // Network
     let monitor = NWPathMonitor()
@@ -113,14 +127,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     /* Data Fetching Methods */
-    
-    func fireAlert(alertTitle : String, alertMessage : String) {
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: {
-            NSLog("\(alertTitle) fired")
-        })
-    }
     
     private func fetchTasteData(_ fetchingUrlStr : String) {
         let request = URLRequest(url: URL(string: fetchingUrlStr)!)
@@ -260,10 +266,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return
             }
             
-            // save the nutrition facts' html as a string in "nutritionHtmlTexts" in the singleton
+            // save the nutrition facts html as NSAttributedString in "nutritionAttrTexts" in the singleton
             if let nutritionHtmlData = data {
                 DispatchQueue.main.async {
-                    RecipeData.instance.nutritionHtmlTexts.append(nutritionHtmlData.html2String)
+                    let nutritionHtmlText = String(bytes: nutritionHtmlData, encoding: .utf8)
+                    let nutritionAttrText = nutritionHtmlText!.html2AttributedString
+                    RecipeData.instance.nutritionAttrTexts.append(nutritionAttrText!)
                 }
             } else {
                 print("Failed to fetch nutrition html data")
@@ -370,6 +378,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
         monitor.cancel()
+    }
+    
+    func fireAlert(alertTitle : String, alertMessage : String) {
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: {
+            NSLog("\(alertTitle) fired")
+        })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fireAlert(alertTitle: "Welcome", alertMessage: "Ready to go!")
     }
 
 //    // TODO: handle local
