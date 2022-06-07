@@ -17,14 +17,15 @@ class RecipeData {
     var recipeImageUrls : [String]
     var recipeImages : [UIImage]
     var ingredientLists = [Int : [String]]() // mapping from recipe id to all ingredients of that recipe
-    var fullSteps = [Int: String]()      // mapping from recipe id to all steps of that recipe
-
+    var fullSteps = [Int: String]()          // mapping from recipe id to all steps of that recipe
+    var nutritionHtmlTexts : [String]
 
     init() {
         self.recipeIds = []
         self.recipeTastes = []
         self.recipeImageUrls = []
         self.recipeImages = []
+        self.nutritionHtmlTexts = []
     }
 
 }

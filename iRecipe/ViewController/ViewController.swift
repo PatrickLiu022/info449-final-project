@@ -9,6 +9,29 @@ import UIKit
 import Network
 import Foundation
 
+extension Data {
+    var html2AttributedString: NSAttributedString? {
+        do {
+            return try NSAttributedString(data: self, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            print("error:", error)
+            return  nil
+        }
+    }
+    var html2String: String { html2AttributedString?.string ?? "" }
+}
+
+extension StringProtocol {
+    var html2AttributedString: NSAttributedString? {
+        Data(utf8).html2AttributedString
+    }
+    var html2String: String {
+        html2AttributedString?.string ?? ""
+    }
+}
+
+
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     /* Variables */
@@ -18,7 +41,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var steps : [Step] = []
     
     // for fetching spoonacular API
-    let API_KEY = "981e37224b464782be59832388b020b1" // wli account
+    let API_KEY = "ae80e31ccb4140e1905c5b890ef97d25"
 
     // Network
     let monitor = NWPathMonitor()
@@ -142,7 +165,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
             
-            guard let self = self else { return }
+            guard self != nil else { return }
             
             guard error == nil else {
                 print("Cannot parse data")
@@ -219,6 +242,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }.resume()
     }
     
+    private func fetchNutritionHtml(_ fetchingUrlStr : String) {
+        let request = URLRequest(url: URL(string: fetchingUrlStr)!)
+        
+        URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+            
+            guard self != nil else { return }
+            
+            guard error == nil else {
+                print("Cannot parse data")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
+                print("Error with http response")
+                return
+            }
+            
+            // save the nutrition facts' html as a string in "nutritionHtmlTexts" in the singleton
+            if let nutritionHtmlData = data {
+                DispatchQueue.main.async {
+                    RecipeData.instance.nutritionHtmlTexts.append(nutritionHtmlData.html2String)
+                }
+            } else {
+                print("Failed to fetch nutrition html data")
+                return
+            }
+        }.resume()
+    }
+    
     private func fetchRecipeData(_ fetchingUrlStr : String) {
         let request = URLRequest(url: URL(string: fetchingUrlStr)!)
         
@@ -262,6 +315,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         // fetching for recipe instructions
                         let instructionUrl = "https://api.spoonacular.com/recipes/\(id)/analyzedInstructions?apiKey=\(self.API_KEY)"
                         self.fetchInstructionData(fetchingUrlStr: instructionUrl, id: id)
+                        
+                        let nutritionUrl = "https://api.spoonacular.com/recipes/\(id)/nutritionLabel?apiKey=\(self.API_KEY)"
+                        self.fetchNutritionHtml(nutritionUrl)
                     }
                     
                     // for each recipe id, fetch for the corresponding recipe's image; fetching results saved to the singleton

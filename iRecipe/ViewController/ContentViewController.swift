@@ -10,23 +10,12 @@ import UIKit
 class ContentViewController: UIViewController {
 
     var currRecipe : Recipe? = nil
+    var indexPathRow : Int = -1
     var doneButtonDestination : String = ""
     
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var favButton: UIButton!
-
-    @IBAction func doneButtonPressed(_ sender: UIButton) {
-        if doneButtonDestination == "viewController" { // go back to "home"
-            if let mainVC = storyboard?.instantiateViewController(withIdentifier: "viewController") as? ViewController {
-                self.navigationController?.pushViewController(mainVC, animated: true)
-            }
-        } else { // go back to "fav"
-            if let favVC = storyboard?.instantiateViewController(withIdentifier: "favViewController") as? FavViewController {
-                self.navigationController?.pushViewController(favVC, animated: true)
-            }
-        }
-    }
 
     @IBAction func favButtonPressed(_ sender: UIButton) {
         if FavRecipe.instance.favRecipes.contains(where: { $0.title == currRecipe!.title }) { // unfav curr recipe
@@ -46,13 +35,22 @@ class ContentViewController: UIViewController {
         }
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "contentToNutritionVC" {
+            if let nutritionVC = segue.destination as? NutritionViewController {
+                nutritionVC.indexPathRow = self.indexPathRow
+                nutritionVC.doneButtonDestination = self.doneButtonDestination
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.ingredientsLabel.text = "\(RecipeData.instance.ingredientLists[currRecipe!.id]!)"
         self.instructionLabel.text = RecipeData.instance.fullSteps[currRecipe!.id]
+        
         let favButtonTitle = FavRecipe.instance.setFavButtonTitle(currRecipe!)
         favButton.setTitle(favButtonTitle, for: .normal)
     }
