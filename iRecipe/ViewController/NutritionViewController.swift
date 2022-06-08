@@ -19,6 +19,7 @@ class NutritionViewController: UIViewController {
         // Do any additional setup after loading the view.
         let nutritionAttrText = RecipeData.instance.nutritionAttrTexts[indexPathRow]
         nutritionTextView.attributedText = nutritionAttrText
+        nutritionTextView.isEditable = false 
     }
     
 
