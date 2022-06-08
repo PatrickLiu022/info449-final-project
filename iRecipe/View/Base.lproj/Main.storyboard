@@ -280,7 +280,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tastes Info Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-zH-zpH">
-                                <rect key="frame" x="100" y="411" width="214" height="200"/>
+                                <rect key="frame" x="100" y="481" width="214" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="fWD-KO-47L"/>
                                 </constraints>
@@ -289,13 +289,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview Tastes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kf9-Vm-9NN">
-                                <rect key="frame" x="60" y="367" width="136" height="24"/>
+                                <rect key="frame" x="60" y="437" width="136" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRg-Qa-f50">
-                                <rect key="frame" x="179" y="681" width="56" height="31"/>
+                                <rect key="frame" x="179" y="711" width="56" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="View"/>
                                 <connections>
@@ -314,13 +314,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3c9-zH-zpH" firstAttribute="top" secondItem="Kf9-Vm-9NN" secondAttribute="bottom" constant="20" id="6cn-5U-bTF"/>
-                            <constraint firstItem="MRg-Qa-f50" firstAttribute="top" secondItem="3c9-zH-zpH" secondAttribute="bottom" constant="70" id="8S8-7y-fcj"/>
+                            <constraint firstItem="MRg-Qa-f50" firstAttribute="top" secondItem="3c9-zH-zpH" secondAttribute="bottom" constant="30" id="8S8-7y-fcj"/>
                             <constraint firstItem="HnT-kc-li9" firstAttribute="trailing" secondItem="3c9-zH-zpH" secondAttribute="trailing" constant="100" id="Bxx-ei-KXu"/>
                             <constraint firstItem="LAx-E4-86G" firstAttribute="top" secondItem="HnT-kc-li9" secondAttribute="top" constant="40" id="DvH-oH-g4l"/>
                             <constraint firstItem="g4X-E0-rqc" firstAttribute="centerX" secondItem="HnT-kc-li9" secondAttribute="centerX" id="HQi-3K-kjd"/>
                             <constraint firstItem="Kf9-Vm-9NN" firstAttribute="leading" secondItem="HnT-kc-li9" secondAttribute="leading" constant="60" id="W0i-zb-tYV"/>
                             <constraint firstItem="MRg-Qa-f50" firstAttribute="centerX" secondItem="HnT-kc-li9" secondAttribute="centerX" id="ZF9-DM-k0s"/>
-                            <constraint firstItem="HnT-kc-li9" firstAttribute="bottom" secondItem="MRg-Qa-f50" secondAttribute="bottom" constant="150" id="bFn-LN-FLw"/>
+                            <constraint firstItem="HnT-kc-li9" firstAttribute="bottom" secondItem="MRg-Qa-f50" secondAttribute="bottom" constant="120" id="bFn-LN-FLw"/>
                             <constraint firstItem="3c9-zH-zpH" firstAttribute="leading" secondItem="HnT-kc-li9" secondAttribute="leading" constant="100" id="eey-tO-RPV"/>
                             <constraint firstItem="g4X-E0-rqc" firstAttribute="top" secondItem="LAx-E4-86G" secondAttribute="bottom" constant="10" id="hbS-5X-XSD"/>
                             <constraint firstItem="LAx-E4-86G" firstAttribute="centerX" secondItem="HnT-kc-li9" secondAttribute="centerX" id="sp2-x8-pd6"/>
