@@ -30,15 +30,16 @@ class SearchViewController: UIViewController, UITableViewDelegate {
     var allRecipes : [Recipe] = []
     var searchResults : [Recipe] = []
     
-    @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var noResultLabel: UILabel!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var searchTableView: UITableView!
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var noResultLabel: UILabel!
     
     func searchRecipes(_ searchStr : String) {
         for recipe in allRecipes { //&& !searchResults.contains(recipe)
-            if recipe.title.lowercased().range(of: searchStr.lowercased()) != nil { // exists recipes whose names contain the search string
+            if recipe.title.lowercased().range(of: searchStr.lowercased()) !=
+                 nil { // exists recipes whose names contain the search string
                 searchResults.append(recipe)
             }
         }

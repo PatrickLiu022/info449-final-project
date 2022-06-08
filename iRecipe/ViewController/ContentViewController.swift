@@ -46,7 +46,7 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.ingredientsLabel.text = "\(RecipeData.instance.ingredientLists[currRecipe!.id]!)"
+        self.ingredientsLabel.text = "\(RecipeData.instance.ingredientLists[currRecipe!.id]!.joined(separator: ", "))"
         self.instructionLabel.text = RecipeData.instance.fullSteps[currRecipe!.id]
         
         let favButtonTitle = FavRecipe.instance.setFavButtonTitle(currRecipe!)

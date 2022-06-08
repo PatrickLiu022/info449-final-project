@@ -42,16 +42,30 @@ class FilterViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var minCaloriesTextField: UITextField!
     @IBOutlet weak var maxCaloriesTextField: UITextField!
+    @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var noResultLabel: UILabel!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var filterTableView: UITableView!
     
     func filterRecipes(minCalories : Int, maxCalories : Int) {
-        for recipe in allRecipes { //&& !searchResults.contains(recipe)
-            if recipe.calories >= minCalories && recipe.calories <= maxCalories { // exists recipes satisfing constraints
-                filterResults.append(recipe)
+        let ingredientsInput = ingredientTextField.text!.components(separatedBy: " ")
+        print(ingredientsInput)
+        for recipe in allRecipes {
+            print(ingredientsInput.count)
+            if(ingredientsInput.count == 1 && ingredientsInput.firstIndex(of: "") == 0){
+                if recipe.calories >= minCalories && recipe.calories <= maxCalories { // exists recipes satisfing constraints
+                    filterResults.append(recipe)
+                }
+            } else {
+            if recipe.calories >= minCalories && recipe.calories <= maxCalories {
+                if (ingredientsInput.contains(where:RecipeData.instance.ingredientLists[recipe.id]!.contains)){
+                    filterResults.append(recipe)
+                }
             }
+                
+            }
+
         }
     }
     
@@ -86,10 +100,10 @@ class FilterViewController: UIViewController, UITableViewDelegate {
             if maxCaloriesInput!.isInt {
                 filterRecipes(minCalories: self.MIN_CALORIES, maxCalories: Int(maxCaloriesInput!)!)
             } else {
-                fireAlert(alertTitle: "Error", alertMessage: "Please give integer input")
+                filterRecipes(minCalories: self.MIN_CALORIES, maxCalories: self.MAX_CALORIES)
             }
         } else { // both text fields are empty
-            self.fireAlert(alertTitle: "Sorry", alertMessage: "Please type in values to filter recipes")
+            filterRecipes(minCalories: self.MIN_CALORIES, maxCalories: self.MAX_CALORIES)
         }
         
         if filterResults.count == 0 { // no results found
