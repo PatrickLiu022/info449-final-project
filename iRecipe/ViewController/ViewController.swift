@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var steps : [Step] = []
     
     // for fetching spoonacular API
-    let API_KEY = "981e37224b464782be59832388b020b1"
+    let API_KEY = "ea33c7b3439049e4ad95b0a3ca0527c0"
     
     @IBOutlet weak var tableView: UITableView!
     
